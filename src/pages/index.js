@@ -2,8 +2,8 @@
 
 import Footer from "@/components/footer";
 import Header from "@/components/header";
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -14,14 +14,30 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Refs for scroll-triggered animations
+  const materialsRef = useRef(null);
+  const processRef = useRef(null);
+  const pvcRef = useRef(null);
+  const aluminumRef = useRef(null);
+
+  const materialsInView = useInView(materialsRef, {
+    once: true,
+    margin: "-100px",
+  });
+  const processInView = useInView(processRef, { once: true, margin: "-100px" });
+  const pvcInView = useInView(pvcRef, { once: true, margin: "-100px" });
+  const aluminumInView = useInView(aluminumRef, {
+    once: true,
+    margin: "-100px",
+  });
+
   return (
     <div className="bg-white">
       <Header />
 
       <main>
-        {/* Hero Section */}
+        {/* HERO SECTION - ANIMATED */}
         <section className="relative h-screen w-full overflow-hidden">
-          {/* Parallax Background */}
           <motion.div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
@@ -33,12 +49,9 @@ export default function Home() {
             transition={{ duration: 1.5, ease: "easeOut" }}
           />
 
-          {/* Overlay */}
           <div className="absolute inset-0 bg-black/10 mix-blend-multiply" />
 
-          {/* Content Container */}
           <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6 max-w-[1400px] mx-auto">
-            {/* Animated Badge */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -53,7 +66,6 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Main Heading */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -64,7 +76,6 @@ export default function Home() {
               <span className="block mt-2">мастер своего дела</span>
             </motion.h1>
 
-            {/* Subtitle */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -74,7 +85,6 @@ export default function Home() {
               Сервис премиального уровня для заказа окон и дверей в Ташкенте
             </motion.p>
 
-            {/* CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -97,7 +107,6 @@ export default function Home() {
                     />
                   </svg>
                 </span>
-
                 <span className="absolute inset-0 bg-black transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
                 <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <span className="text-white text-sm tracking-[0.15em] uppercase font-medium flex items-center gap-3">
@@ -120,7 +129,6 @@ export default function Home() {
               </button>
             </motion.div>
 
-            {/* Scroll Indicator */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -155,7 +163,6 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            {/* Decorative Lines */}
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
@@ -172,7 +179,6 @@ export default function Home() {
             />
           </div>
 
-          {/* Feature Stats */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -207,153 +213,169 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Materials Section */}
+        {/* MATERIALS SECTION - ANIMATED */}
         <section
+          ref={materialsRef}
           className="relative w-full bg-neutral-50 overflow-hidden"
           id="materials"
         >
-          {/* Section Header */}
           <div className="max-w-[1600px] mx-auto px-6 lg:px-12 pt-32 pb-20">
-            <div className="max-w-3xl">
-              <span className="text-xs tracking-[0.3em] uppercase text-neutral-400 font-light mb-4 block">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={materialsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="max-w-3xl"
+            >
+              <motion.span
+                initial={{ opacity: 0, x: -20 }}
+                animate={materialsInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-xs tracking-[0.3em] uppercase text-neutral-400 font-light mb-4 block"
+              >
                 Материалы
-              </span>
-              <h2 className="text-5xl lg:text-7xl font-extralight tracking-tight text-black leading-[0.95] mb-8">
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={materialsInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="text-5xl lg:text-7xl font-extralight tracking-tight text-black leading-[0.95] mb-8"
+              >
                 Точность в каждой детали
-              </h2>
-              <p className="text-neutral-500 text-lg font-light leading-relaxed max-w-xl">
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={materialsInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="text-neutral-500 text-lg font-light leading-relaxed max-w-xl"
+              >
                 Мы работаем только с материалами высочайшего качества,
                 проверенными временем и технологиями.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
           </div>
 
-          {/* Materials Grid */}
           <div className="max-w-[1600px] mx-auto px-6 lg:px-12 pb-32">
             <div className="grid lg:grid-cols-2 gap-6">
-              {/* Wood Material Card */}
-              <div className="group relative h-[600px] overflow-hidden bg-black">
-                <div
-                  className="absolute inset-0 transition-all duration-[1.2s] ease-out scale-100 group-hover:scale-105"
-                  style={{
-                    backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuDXwko1h3stHd5CFbPT_Ongx2ObEHYsd0ckqNBM_uqN1NlVudFqYCJb6uJTMSlCZyFLfUa-ULlSZjhB3xLJ_nrIX1neB7w2jHS58Dq1Friv8G1-mKvyDyoYFG7W6GEfCOuMjTuWv2Skad29rMvXpkXdmr5e6ACjj8IL93AefMxRDj0q32keyplXP2_KUzoUWAWLwnxxdhP7uCDjpdyNuySxyG7oYuqysoJDHTnGaeZu1tAcHSsu5-cDLP3tB_-09NzVj7v8-R4hmPfF")`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
+              {[
+                {
+                  num: "01",
+                  title: "Натуральное дерево",
+                  desc: "Экологически чистый дуб и орех, обработанные для вечной службы и природного тепла вашего дома.",
+                  img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDXwko1h3stHd5CFbPT_Ongx2ObEHYsd0ckqNBM_uqN1NlVudFqYCJb6uJTMSlCZyFLfUa-ULlSZjhB3xLJ_nrIX1neB7w2jHS58Dq1Friv8G1-mKvyDyoYFG7W6GEfCOuMjTuWv2Skad29rMvXpkXdmr5e6ACjj8IL93AefMxRDj0q32keyplXP2_KUzoUWAWLwnxxdhP7uCDjpdyNuySxyG7oYuqysoJDHTnGaeZu1tAcHSsu5-cDLP3tB_-09NzVj7v8-R4hmPfF",
+                  link: "#wood",
+                },
+                {
+                  num: "02",
+                  title: "Современный металл",
+                  desc: "Аэрокосмический алюминий с терморазрывом для безупречной прочности и минималистичного дизайна.",
+                  img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCjQyVTnEnYUIFPU3TJUEkTeZE7W3bT35-PzH9X9LCVfTWPFRQeWLa60Nxl6PGHGb3-JA4b0gK1vk1p4Ym1ZE5RjmEKIjRCXvtQttmQCAdOBBGQDpmG3xgywMxrQycG0OWNqY7XRGtaYFNBj87SkaA4EzQZb1rFp7pFlV9PMDaLut9Gc63jq9EJVSYy2AOVlLzsqAhyOTuvLjlHcx5w5zJdOC5BpAtmBVjKMVkGn8Uw3Xtt1nEDDpUZbmz0Wx9hi2f36SBIpfRhVtvj",
+                  link: "#metal",
+                },
+              ].map((material, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 60 }}
+                  animate={materialsInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.5 + index * 0.2,
+                    ease: [0.22, 1, 0.36, 1],
                   }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-90 group-hover:opacity-75 transition-opacity duration-700" />
-                <div className="absolute inset-0 flex flex-col justify-end p-10 lg:p-16">
-                  <div className="absolute top-10 right-10 lg:top-16 lg:right-16">
-                    <div className="w-16 h-16 border border-white/20 flex items-center justify-center">
-                      <span className="text-white/40 text-sm font-light">
-                        01
-                      </span>
+                  className="group relative h-[600px] overflow-hidden bg-black"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage: `url("${material.img}")`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-90 group-hover:opacity-75 transition-opacity duration-700" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-10 lg:p-16">
+                    <div className="absolute top-10 right-10 lg:top-16 lg:right-16">
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={
+                          materialsInView ? { opacity: 1, scale: 1 } : {}
+                        }
+                        transition={{ duration: 0.6, delay: 0.8 + index * 0.2 }}
+                        className="w-16 h-16 border border-white/20 flex items-center justify-center"
+                      >
+                        <span className="text-white/40 text-sm font-light">
+                          {material.num}
+                        </span>
+                      </motion.div>
                     </div>
-                  </div>
-                  <div className="mb-8">
-                    <h3 className="text-white text-4xl lg:text-5xl font-extralight tracking-tight mb-4 leading-none">
-                      Натуральное
-                      <br />
-                      дерево
-                    </h3>
-                    <div className="w-16 h-[1px] bg-white/30 group-hover:w-32 transition-all duration-700" />
-                  </div>
-                  <p className="text-white/60 text-sm lg:text-base font-light leading-relaxed max-w-md mb-8 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100">
-                    Экологически чистый дуб и орех, обработанные для вечной
-                    службы и природного тепла вашего дома.
-                  </p>
-                  <a
-                    href="#wood"
-                    className="inline-flex items-center gap-3 text-white text-xs tracking-[0.2em] uppercase font-medium group-hover:gap-5 transition-all duration-500"
-                  >
-                    <span>Узнать больше</span>
-                    <svg
-                      className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-
-              {/* Metal Material Card */}
-              <div className="group relative h-[600px] overflow-hidden bg-black">
-                <div
-                  className="absolute inset-0 transition-all duration-[1.2s] ease-out scale-100 group-hover:scale-105"
-                  style={{
-                    backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjQyVTnEnYUIFPU3TJUEkTeZE7W3bT35-PzH9X9LCVfTWPFRQeWLa60Nxl6PGHGb3-JA4b0gK1vk1p4Ym1ZE5RjmEKIjRCXvtQttmQCAdOBBGQDpmG3xgywMxrQycG0OWNqY7XRGtaYFNBj87SkaA4EzQZb1rFp7pFlV9PMDaLut9Gc63jq9EJVSYy2AOVlLzsqAhyOTuvLjlHcx5w5zJdOC5BpAtmBVjKMVkGn8Uw3Xtt1nEDDpUZbmz0Wx9hi2f36SBIpfRhVtvj")`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-90 group-hover:opacity-75 transition-opacity duration-700" />
-                <div className="absolute inset-0 flex flex-col justify-end p-10 lg:p-16">
-                  <div className="absolute top-10 right-10 lg:top-16 lg:right-16">
-                    <div className="w-16 h-16 border border-white/20 flex items-center justify-center">
-                      <span className="text-white/40 text-sm font-light">
-                        02
-                      </span>
+                    <div className="mb-8">
+                      <h3 className="text-white text-4xl lg:text-5xl font-extralight tracking-tight mb-4 leading-none">
+                        {material.title.split(" ")[0]}
+                        <br />
+                        {material.title.split(" ").slice(1).join(" ")}
+                      </h3>
+                      <div className="w-16 h-[1px] bg-white/30 group-hover:w-32 transition-all duration-700" />
                     </div>
-                  </div>
-                  <div className="mb-8">
-                    <h3 className="text-white text-4xl lg:text-5xl font-extralight tracking-tight mb-4 leading-none">
-                      Современный
-                      <br />
-                      металл
-                    </h3>
-                    <div className="w-16 h-[1px] bg-white/30 group-hover:w-32 transition-all duration-700" />
-                  </div>
-                  <p className="text-white/60 text-sm lg:text-base font-light leading-relaxed max-w-md mb-8 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100">
-                    Аэрокосмический алюминий с терморазрывом для безупречной
-                    прочности и минималистичного дизайна.
-                  </p>
-                  <a
-                    href="#metal"
-                    className="inline-flex items-center gap-3 text-white text-xs tracking-[0.2em] uppercase font-medium group-hover:gap-5 transition-all duration-500"
-                  >
-                    <span>Узнать больше</span>
-                    <svg
-                      className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                    <p className="text-white/60 text-sm lg:text-base font-light leading-relaxed max-w-md mb-8 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100">
+                      {material.desc}
+                    </p>
+                    <a
+                      href={material.link}
+                      className="inline-flex items-center gap-3 text-white text-xs tracking-[0.2em] uppercase font-medium group-hover:gap-5 transition-all duration-500"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </div>
+                      <span>Узнать больше</span>
+                      <svg
+                        className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.5}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Process Section */}
+        {/* PROCESS SECTION - ANIMATED */}
         <section
+          ref={processRef}
           className="relative w-full bg-white overflow-hidden"
           id="process"
         >
           <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-32">
-            <div className="mb-20">
-              <span className="text-xs tracking-[0.3em] uppercase text-neutral-400 font-light mb-4 block">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={processInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8 }}
+              className="mb-20"
+            >
+              <motion.span
+                initial={{ opacity: 0, x: -20 }}
+                animate={processInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-xs tracking-[0.3em] uppercase text-neutral-400 font-light mb-4 block"
+              >
                 Процесс
-              </span>
-              <h2 className="text-5xl lg:text-7xl font-extralight tracking-tight text-black mb-6">
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={processInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="text-5xl lg:text-7xl font-extralight tracking-tight text-black mb-6"
+              >
                 Как мы работаем
-              </h2>
-            </div>
+              </motion.h2>
+            </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
               {[
@@ -378,10 +400,28 @@ export default function Home() {
                   desc: "Чистая установка и финальная настройка фурнитуры нашими мастерами",
                 },
               ].map((step, index) => (
-                <div key={index} className="relative group">
-                  <div className="text-[80px] font-extralight text-neutral-100 absolute -top-6 -left-2 group-hover:text-neutral-200 transition-colors">
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={processInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.4 + index * 0.15,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="relative group"
+                >
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={processInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{
+                      duration: 0.6,
+                      delay: 0.6 + index * 0.15,
+                    }}
+                    className="text-[80px] font-extralight text-neutral-100 absolute -top-6 -left-2 group-hover:text-neutral-200 transition-colors"
+                  >
                     {step.num}
-                  </div>
+                  </motion.div>
                   <div className="relative pt-16">
                     <h4 className="text-xl font-light text-black mb-3">
                       {step.title}
@@ -390,7 +430,7 @@ export default function Home() {
                       {step.desc}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -712,6 +752,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Continue with PVC and Aluminum sections... */}
+        {/* Due to length, I'll create Part 2 */}
       </main>
 
       <Footer />

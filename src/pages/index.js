@@ -4,9 +4,10 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { motion, useInView } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-
+import ContactUsModal from "@/components/modal";
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -33,8 +34,11 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-      <Header />
-
+      <Header isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <ContactUsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
       <main>
         {/* HERO SECTION - ANIMATED */}
         <section className="relative h-screen w-full overflow-hidden">
@@ -752,9 +756,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* Continue with PVC and Aluminum sections... */}
-        {/* Due to length, I'll create Part 2 */}
       </main>
 
       <Footer />

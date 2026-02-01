@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Brand from "../brand";
+import ContactUsModal from "../modal";
 
 // Navigation data - easily maintainable
 const navigationItems = [
@@ -12,7 +13,7 @@ const navigationItems = [
   { id: 6, label: "О нас", href: "/o-nas" },
 ];
 
-const Header = () => {
+const Header = ({ isModalOpen, setIsModalOpen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState("/");
 
@@ -69,7 +70,10 @@ const Header = () => {
               >
                 +998 97 973 33 33
               </a>
-              <button className="px-6 py-2.5 bg-black text-white text-[12px] font-medium tracking-wide hover:bg-black/90 transition-all">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="px-6 py-2.5 bg-black text-white text-[12px] font-medium tracking-wide hover:bg-black/90 transition-all"
+              >
                 Консультация
               </button>
             </div>

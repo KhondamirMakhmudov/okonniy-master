@@ -61,7 +61,7 @@ export default function Home() {
               <div className="inline-flex items-center gap-2 px-4 py-2 border border-white/20 backdrop-blur-sm bg-white/5 rounded-full">
                 <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
                 <span className="text-white/90 text-xs tracking-[0.2em] uppercase font-light">
-                  Premium Quality
+                  Премиуи качества
                 </span>
               </div>
             </motion.div>
@@ -238,7 +238,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={materialsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-5xl lg:text-7xl font-extralight tracking-tight text-black leading-[0.95] mb-8"
+                className="text-5xl lg:text-7xl tracking-tight text-black leading-[0.95] mb-8"
               >
                 Точность в каждой детали
               </motion.h2>
@@ -371,7 +371,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={processInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-5xl lg:text-7xl font-extralight tracking-tight text-black mb-6"
+                className="text-5xl lg:text-7xl  tracking-tight text-black mb-6"
               >
                 Как мы работаем
               </motion.h2>
@@ -418,7 +418,7 @@ export default function Home() {
                       duration: 0.6,
                       delay: 0.6 + index * 0.15,
                     }}
-                    className="text-[80px] font-extralight text-neutral-100 absolute -top-6 -left-2 group-hover:text-neutral-200 transition-colors"
+                    className="text-[80px] font-extralight text-neutral-300 absolute -top-2 -left-2 group-hover:text-neutral-200 transition-colors"
                   >
                     {step.num}
                   </motion.div>
@@ -449,7 +449,7 @@ export default function Home() {
                 </span>
                 <div className="h-[1px] flex-1 bg-neutral-200" />
               </div>
-              <h2 className="text-5xl lg:text-7xl font-extralight tracking-tight text-black mb-6">
+              <h2 className="text-5xl lg:text-7xl  tracking-tight text-black mb-6">
                 ПВХ окна
               </h2>
               <p className="text-neutral-500 text-lg font-light leading-relaxed max-w-2xl">
@@ -611,7 +611,7 @@ export default function Home() {
                 </span>
                 <div className="h-[1px] flex-1 bg-neutral-200" />
               </div>
-              <h2 className="text-5xl lg:text-7xl font-extralight tracking-tight text-black mb-6">
+              <h2 className="text-5xl lg:text-7xl  tracking-tight text-black mb-6">
                 Алюминиевые окна
               </h2>
               <p className="text-neutral-500 text-lg font-light leading-relaxed max-w-2xl">
@@ -691,7 +691,7 @@ export default function Home() {
 
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
-                <h4 className="text-3xl lg:text-4xl font-extralight tracking-tight text-black mb-8">
+                <h4 className="text-3xl lg:text-4xl font-light tracking-tight text-black mb-8">
                   Преимущества алюминия
                 </h4>
                 <p className="text-neutral-500 font-light leading-relaxed mb-12 text-base">

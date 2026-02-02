@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation"; // For Next.js 13+ App Router
+// OR for Next.js Pages Router: import { useRouter } from "next/router";
+// OR for React Router: import { useLocation } from "react-router-dom";
 import Brand from "../brand";
 import ContactUsModal from "../modal";
 
 // Navigation data - easily maintainable
 const navigationItems = [
   { id: 1, label: "Главная", href: "/" },
-
   { id: 2, label: "Окна", href: "/windows" },
   { id: 3, label: "Фасад", href: "/fasad" },
   { id: 4, label: "Двери", href: "/dveri" },
@@ -15,7 +17,38 @@ const navigationItems = [
 
 const Header = ({ isModalOpen, setIsModalOpen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState("/");
+
+  // Get current pathname based on your routing library
+  // Choose ONE of these options based on your setup:
+
+  // Option 1: For Next.js 13+ App Router
+  const pathname = usePathname();
+
+  // Option 2: For Next.js Pages Router (comment out Option 1)
+  // const router = useRouter();
+  // const pathname = router.pathname;
+
+  // Option 3: For React Router (comment out Option 1)
+  // const location = useLocation();
+  // const pathname = location.pathname;
+
+  // Use effect to sync active item with URL on component mount
+  const [activeItem, setActiveItem] = useState(pathname || "/");
+
+  // Update active item when URL changes
+  useEffect(() => {
+    setActiveItem(pathname || "/");
+  }, [pathname]);
+
+  // Function to check if item is active
+  const isActive = (href) => {
+    // Exact match for homepage
+    if (href === "/") {
+      return activeItem === "/";
+    }
+    // For other pages, check if current path starts with href
+    return activeItem.startsWith(href);
+  };
 
   return (
     <>
@@ -40,7 +73,7 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
                     className={`
                     text-[13px] font-medium tracking-[0.02em] transition-colors duration-200
                     ${
-                      activeItem === item.href
+                      isActive(item.href)
                         ? "text-black"
                         : "text-black/50 group-hover:text-black"
                     }
@@ -51,11 +84,7 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
                   <span
                     className={`
                     absolute -bottom-6 left-0 h-[1px] bg-black transition-all duration-300
-                    ${
-                      activeItem === item.href
-                        ? "w-full"
-                        : "w-0 group-hover:w-full"
-                    }
+                    ${isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"}
                   `}
                   />
                 </a>
@@ -127,7 +156,7 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
                 className={`
                   block py-4 text-2xl font-light border-b border-black/5
                   transition-all duration-300
-                  ${activeItem === item.href ? "text-black" : "text-black/40"}
+                  ${isActive(item.href) ? "text-black" : "text-black/40"}
                 `}
                 style={{
                   transitionDelay: isMenuOpen ? `${index * 40}ms` : "0ms",
@@ -152,7 +181,13 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
             <a href="tel:+998901234567" className="block text-lg text-black/60">
               +998 90 123 45 67
             </a>
-            <button className="w-full py-3.5 bg-black text-white text-[13px] font-medium tracking-wide">
+            <button
+              onClick={() => {
+                setIsModalOpen(true);
+                setIsMenuOpen(false);
+              }}
+              className="w-full py-3.5 bg-black text-white text-[13px] font-medium tracking-wide"
+            >
               Консультация
             </button>
           </div>

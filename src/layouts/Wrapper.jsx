@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 import ContactUsModal from "@/components/modal";
 import { useState } from "react";
@@ -11,6 +12,7 @@ const Wrapper = ({ children, modalIsOpen, setModalIsOpen }) => {
         onClose={() => setModalIsOpen(false)}
       />
       {children}
+      <Footer />
     </div>
   );
 };

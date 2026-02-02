@@ -1,14 +1,18 @@
-import Header from "@/components/header"
-import ContactUsModal from "@/components/modal"
-import { useState } from "react"
+import Header from "@/components/header";
+import ContactUsModal from "@/components/modal";
+import { useState } from "react";
 
-const Wrapper = ({children}) => {
-    const [modalIsOpen, setModalIsOpen] = useState(false)
-    return <>
-        <Header isModalOpen={modalIsOpen} setIsModalOpen={setModalIsOpen}/> 
-        <ContactUsModal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}/>
-        {children}
-    </>
-}
+const Wrapper = ({ children, modalIsOpen, setModalIsOpen }) => {
+  return (
+    <div className="container mx-auto">
+      <Header isModalOpen={modalIsOpen} setIsModalOpen={setModalIsOpen} />
+      <ContactUsModal
+        isOpen={modalIsOpen}
+        onClose={() => setModalIsOpen(false)}
+      />
+      {children}
+    </div>
+  );
+};
 
-export default Wrapper
+export default Wrapper;

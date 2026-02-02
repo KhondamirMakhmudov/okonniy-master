@@ -23,7 +23,7 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
         <div className="container mx-auto">
           <div className="flex items-center justify-between h-20">
             {/* Brand */}
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <Brand title="Оконный Мастер" />
             </div>
 

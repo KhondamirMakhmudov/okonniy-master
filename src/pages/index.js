@@ -1,10 +1,10 @@
 "use client";
 
 import Footer from "@/components/footer";
-import Header from "@/components/header";
 import { motion, useInView } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import ContactUsModal from "@/components/modal";
+import Wrapper from "@/layouts/Wrapper";
+
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,12 +33,8 @@ export default function Home() {
   });
 
   return (
-    <div className="bg-white">
-      <Header isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-      <ContactUsModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+    <Wrapper className="bg-white">
+
       <main>
         {/* HERO SECTION - ANIMATED */}
         <section className="relative h-screen w-full overflow-hidden">
@@ -65,7 +61,7 @@ export default function Home() {
               <div className="inline-flex items-center gap-2 px-4 py-2 border border-white/20 backdrop-blur-sm bg-white/5 rounded-full">
                 <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
                 <span className="text-white/90 text-xs tracking-[0.2em] uppercase font-light">
-                  Премиуи качества
+                  Премиум качества
                 </span>
               </div>
             </motion.div>
@@ -759,6 +755,6 @@ export default function Home() {
       </main>
 
       <Footer />
-    </div>
+    </Wrapper>
   );
 }

@@ -35,7 +35,7 @@ export default function Home() {
     >
       <main>
         {/* HERO SECTION - RESPONSIVE & ADAPTIVE */}
-        <section className="relative h-screen min-h-[600px] w-full overflow-hidden">
+        <section className="relative h-screen min-h-150 w-full overflow-hidden">
           <motion.div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
@@ -98,7 +98,7 @@ export default function Home() {
                     Заказать бесплатный замер
                   </span>
                   <svg
-                    className="w-3 h-3 sm:w-4 sm:h-4 transform group-hover:translate-x-1 transition-transform duration-300 flex-shrink-0"
+                    className="w-3 h-3 sm:w-4 sm:h-4 transform group-hover:translate-x-1 transition-transform duration-300 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -759,8 +759,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </Wrapper>
   );
 }

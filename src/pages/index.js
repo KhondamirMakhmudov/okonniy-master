@@ -26,15 +26,13 @@ export default function Home() {
     margin: "-100px",
   });
   const processInView = useInView(processRef, { once: true, margin: "-100px" });
-  const pvcInView = useInView(pvcRef, { once: true, margin: "-100px" });
-  const aluminumInView = useInView(aluminumRef, {
-    once: true,
-    margin: "-100px",
-  });
 
   return (
-    <Wrapper className="bg-white">
-
+    <Wrapper
+      modalIsOpen={isModalOpen}
+      setModalIsOpen={setIsModalOpen}
+      className="bg-white"
+    >
       <main>
         {/* HERO SECTION - ANIMATED */}
         <section className="relative h-screen w-full overflow-hidden">

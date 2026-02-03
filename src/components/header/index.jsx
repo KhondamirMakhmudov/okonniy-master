@@ -11,26 +11,13 @@ const navigationItems = [
   { id: 2, label: "Окна", href: "/windows" },
   { id: 3, label: "Фасад", href: "/fasad" },
   { id: 4, label: "Двери", href: "/dveri" },
-  { id: 5, label: "Другое", href: "/drugoe" },
-  { id: 6, label: "О нас", href: "/o-nas" },
+  { id: 5, label: "О нас", href: "/o-nas" },
 ];
 
 const Header = ({ isModalOpen, setIsModalOpen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Get current pathname based on your routing library
-  // Choose ONE of these options based on your setup:
-
-  // Option 1: For Next.js 13+ App Router
   const pathname = usePathname();
-
-  // Option 2: For Next.js Pages Router (comment out Option 1)
-  // const router = useRouter();
-  // const pathname = router.pathname;
-
-  // Option 3: For React Router (comment out Option 1)
-  // const location = useLocation();
-  // const pathname = location.pathname;
 
   // Use effect to sync active item with URL on component mount
   const [activeItem, setActiveItem] = useState(pathname || "/");
@@ -83,7 +70,7 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
                   </span>
                   <span
                     className={`
-                    absolute -bottom-6 left-0 h-[1px] bg-black transition-all duration-300
+                    absolute -bottom-6 left-0 h-px bg-black transition-all duration-300
                     ${isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"}
                   `}
                   />

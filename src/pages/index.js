@@ -89,7 +89,10 @@ export default function Home() {
               transition={{ duration: 1, delay: 1, ease: [0.22, 1, 0.36, 1] }}
               className="w-full sm:w-auto px-4 sm:px-0"
             >
-              <button className="group relative overflow-hidden w-full sm:w-auto px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 bg-white text-black text-[10px] sm:text-xs md:text-sm tracking-[0.1em] sm:tracking-[0.15em] uppercase font-medium transition-all duration-500 hover:scale-105">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="group relative overflow-hidden w-full sm:w-auto px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 bg-white text-black text-[10px] sm:text-xs md:text-sm tracking-[0.1em] sm:tracking-[0.15em] uppercase font-medium transition-all duration-500 hover:scale-105"
+              >
                 <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-3">
                   <span className="whitespace-nowrap">
                     Заказать бесплатный замер

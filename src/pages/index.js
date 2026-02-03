@@ -34,8 +34,8 @@ export default function Home() {
       className="bg-white"
     >
       <main>
-        {/* HERO SECTION - ANIMATED */}
-        <section className="relative h-screen w-full overflow-hidden">
+        {/* HERO SECTION - RESPONSIVE & ADAPTIVE */}
+        <section className="relative h-screen min-h-[600px] w-full overflow-hidden">
           <motion.div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
@@ -49,16 +49,16 @@ export default function Home() {
 
           <div className="absolute inset-0 bg-black/10 mix-blend-multiply" />
 
-          <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6 max-w-[1400px] mx-auto">
+          <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-4 sm:px-6 max-w-[1400px] mx-auto pt-20 sm:pt-0">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-8"
+              className="mb-4 sm:mb-6 md:mb-8"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 border border-white/20 backdrop-blur-sm bg-white/5 rounded-full">
-                <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                <span className="text-white/90 text-xs tracking-[0.2em] uppercase font-light">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 border border-white/20 backdrop-blur-sm bg-white/5 rounded-full">
+                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full animate-pulse" />
+                <span className="text-white/90 text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase font-light">
                   Премиум качества
                 </span>
               </div>
@@ -68,17 +68,17 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="text-white text-5xl md:text-7xl lg:text-8xl font-extralight tracking-tight mb-8 max-w-6xl leading-[1.05]"
+              className="text-white text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-extralight tracking-tight mb-4 sm:mb-6 md:mb-8 max-w-6xl leading-[1.1] sm:leading-[1.05] px-2"
             >
               Оконный Мастер —<br />
-              <span className="block mt-2">мастер своего дела</span>
+              <span className="block mt-1 sm:mt-2">мастер своего дела</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="text-white/70 text-lg md:text-xl font-light max-w-2xl mb-12 leading-relaxed"
+              className="text-white/70 text-sm sm:text-base md:text-lg lg:text-xl font-light max-w-2xl mb-8 sm:mb-10 md:mb-12 leading-relaxed px-2"
             >
               Сервис премиального уровня для заказа окон и дверей в Ташкенте
             </motion.p>
@@ -87,12 +87,15 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full sm:w-auto px-4 sm:px-0"
             >
-              <button className="group relative overflow-hidden px-10 py-4 bg-white text-black text-sm tracking-[0.15em] uppercase font-medium transition-all duration-500 hover:scale-105">
-                <span className="relative z-10 flex items-center gap-3">
-                  Заказать бесплатный замер
+              <button className="group relative overflow-hidden w-full sm:w-auto px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 bg-white text-black text-[10px] sm:text-xs md:text-sm tracking-[0.1em] sm:tracking-[0.15em] uppercase font-medium transition-all duration-500 hover:scale-105">
+                <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-3">
+                  <span className="whitespace-nowrap">
+                    Заказать бесплатный замер
+                  </span>
                   <svg
-                    className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+                    className="w-3 h-3 sm:w-4 sm:h-4 transform group-hover:translate-x-1 transition-transform duration-300 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -107,10 +110,12 @@ export default function Home() {
                 </span>
                 <span className="absolute inset-0 bg-black transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
                 <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <span className="text-white text-sm tracking-[0.15em] uppercase font-medium flex items-center gap-3">
-                    Заказать бесплатный замер
+                  <span className="text-white text-[10px] sm:text-xs md:text-sm tracking-[0.1em] sm:tracking-[0.15em] uppercase font-medium flex items-center gap-2 sm:gap-3">
+                    <span className="whitespace-nowrap">
+                      Заказать бесплатный замер
+                    </span>
                     <svg
-                      className="w-4 h-4"
+                      className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -131,7 +136,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 1.5 }}
-              className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+              className="absolute bottom-32 sm:bottom-28 md:bottom-24 lg:bottom-12 left-1/2 transform -translate-x-1/2 hidden sm:block"
             >
               <motion.div
                 animate={{ y: [0, 8, 0] }}
@@ -142,11 +147,11 @@ export default function Home() {
                 }}
                 className="flex flex-col items-center gap-2"
               >
-                <span className="text-white/50 text-xs tracking-[0.2em] uppercase font-light">
+                <span className="text-white/50 text-[10px] sm:text-xs tracking-[0.2em] uppercase font-light">
                   Scroll
                 </span>
                 <svg
-                  className="w-6 h-6 text-white/50"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-white/50"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -165,14 +170,14 @@ export default function Home() {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
-              className="absolute left-0 top-1/2 w-20 h-[1px] bg-white/30 hidden lg:block"
+              className="absolute left-0 top-1/2 w-12 md:w-16 lg:w-20 h-[1px] bg-white/30 hidden lg:block"
               style={{ transformOrigin: "left" }}
             />
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
-              className="absolute right-0 top-1/2 w-20 h-[1px] bg-white/30 hidden lg:block"
+              className="absolute right-0 top-1/2 w-12 md:w-16 lg:w-20 h-[1px] bg-white/30 hidden lg:block"
               style={{ transformOrigin: "right" }}
             />
           </div>
@@ -183,8 +188,8 @@ export default function Home() {
             transition={{ duration: 1, delay: 1.2 }}
             className="absolute bottom-0 left-0 right-0 z-20"
           >
-            <div className="max-w-[1400px] mx-auto px-6 pb-12">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pb-6 sm:pb-8 md:pb-12">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
                 {[
                   { value: "15+", label: "Лет опыта" },
                   { value: "2000+", label: "Проектов" },
@@ -196,12 +201,12 @@ export default function Home() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 1.4 + index * 0.1 }}
-                    className="backdrop-blur-md bg-white/5 border border-white/10 p-6 text-center"
+                    className="backdrop-blur-md bg-white/5 border border-white/10 p-3 sm:p-4 md:p-5 lg:p-6 text-center"
                   >
-                    <div className="text-3xl lg:text-4xl font-extralight text-white mb-2">
+                    <div className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white mb-1 sm:mb-2">
                       {stat.value}
                     </div>
-                    <div className="text-xs tracking-[0.2em] uppercase text-white/60 font-light">
+                    <div className="text-[9px] sm:text-[10px] md:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white/60 font-light">
                       {stat.label}
                     </div>
                   </motion.div>

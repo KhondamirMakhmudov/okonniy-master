@@ -12,6 +12,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState("");
   const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileError, setTurnstileError] = useState(false);
   const turnstileWidgetId = useRef(null);
 
   // Load Turnstile script
@@ -26,6 +27,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
     }
   }, []);
 
+  // Render Turnstile widget when modal opens
   useEffect(() => {
     if (isOpen && window.turnstile) {
       const timer = setTimeout(() => {
@@ -34,18 +36,40 @@ const ContactUsModal = ({ isOpen, onClose }) => {
           turnstileWidgetId.current = window.turnstile.render(
             "#turnstile-container",
             {
-              sitekey: "0x4AAAAAACXKRSZAcp5qBqCs",
+              sitekey: "0x4AAAAAACXKRSZAcp5qBqCs", // Replace with your actual site key
               callback: (token) => {
-                console.log("Turnstile token received:", token);
+                console.log("Turnstile token received");
                 setTurnstileToken(token);
+                setTurnstileError(false);
               },
-              "error-callback": (error) => {
-                console.error("Turnstile error:", error);
-                setError("Ошибка верификации. Пожалуйста, попробуйте еще раз.");
+              "error-callback": (errorCode) => {
+                console.error("Turnstile error:", errorCode);
+                setTurnstileError(true);
+
+                const errorMessages = {
+                  110100:
+                    "Turnstile виджет не загрузился. Проверьте соединение.",
+                  110200: "Домен не разрешен. Свяжитесь с администратором.",
+                  110300: "Неверный ключ сайта.",
+                  110400: "Истекло время ожидания.",
+                  110500: "Внутренняя ошибка Turnstile.",
+                  110600: "Turnstile не поддерживается в этом браузере.",
+                  300000: "Общая ошибка верификации.",
+                };
+
+                const message =
+                  errorMessages[errorCode] ||
+                  "Ошибка верификации. Попробуйте обновить страницу.";
+                setError(message);
               },
               "expired-callback": () => {
                 console.log("Turnstile token expired");
                 setTurnstileToken("");
+              },
+              "timeout-callback": () => {
+                console.log("Turnstile timeout");
+                setTurnstileError(true);
+                setError("Истекло время верификации. Попробуйте еще раз.");
               },
               theme: "light",
               size: "normal",
@@ -66,6 +90,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
       }
       turnstileWidgetId.current = null;
       setTurnstileToken("");
+      setTurnstileError(false);
     }
   }, [isOpen]);
 
@@ -85,7 +110,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
       return;
     }
 
-    console.log("Submitting with token:", turnstileToken);
+    console.log("Submitting with token");
     setIsSubmitting(true);
     setError("");
 
@@ -301,7 +326,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                   <div className="error-shake mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
                     <p className="text-red-600 text-sm font-medium flex items-center gap-2">
                       <svg
-                        className="w-5 h-5"
+                        className="w-5 h-5 flex-shrink-0"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -397,7 +422,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    disabled={isSubmitting || !turnstileToken}
+                    disabled={isSubmitting || !turnstileToken || turnstileError}
                     className="form-field relative w-full py-4 bg-neutral-900 hover:bg-neutral-800 text-white font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden group mt-8"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2 uppercase tracking-wider text-sm">

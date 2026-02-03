@@ -22,11 +22,6 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
   // Use effect to sync active item with URL on component mount
   const [activeItem, setActiveItem] = useState(pathname || "/");
 
-  // Update active item when URL changes
-  useEffect(() => {
-    setActiveItem(pathname || "/");
-  }, [pathname]);
-
   // Function to check if item is active
   const isActive = (href) => {
     // Exact match for homepage

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const ContactUsModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -10,29 +10,135 @@ const ContactUsModal = ({ isOpen, onClose }) => {
   const [focused, setFocused] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const turnstileWidgetId = useRef(null);
+
+  // Load Turnstile script
+  useEffect(() => {
+    if (!document.getElementById("turnstile-script")) {
+      const script = document.createElement("script");
+      script.id = "turnstile-script";
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isOpen && window.turnstile) {
+      const timer = setTimeout(() => {
+        const container = document.getElementById("turnstile-container");
+        if (container && !turnstileWidgetId.current) {
+          turnstileWidgetId.current = window.turnstile.render(
+            "#turnstile-container",
+            {
+              sitekey: "0x4AAAAAACXKRSZAcp5qBqCs",
+              callback: (token) => {
+                console.log("Turnstile token received:", token);
+                setTurnstileToken(token);
+              },
+              "error-callback": (error) => {
+                console.error("Turnstile error:", error);
+                setError("Ошибка верификации. Пожалуйста, попробуйте еще раз.");
+              },
+              "expired-callback": () => {
+                console.log("Turnstile token expired");
+                setTurnstileToken("");
+              },
+              theme: "light",
+              size: "normal",
+            },
+          );
+        }
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+
+    // Reset widget when modal closes
+    if (!isOpen && turnstileWidgetId.current) {
+      try {
+        window.turnstile?.reset(turnstileWidgetId.current);
+      } catch (e) {
+        console.error("Error resetting turnstile:", e);
+      }
+      turnstileWidgetId.current = null;
+      setTurnstileToken("");
+    }
+  }, [isOpen]);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+    if (error) setError("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!turnstileToken) {
+      setError("Пожалуйста, пройдите проверку безопасности");
+      return;
+    }
+
+    console.log("Submitting with token:", turnstileToken);
     setIsSubmitting(true);
+    setError("");
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch("http://10.40.9.114:8000/api/v1/public", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Turnstile-Token": turnstileToken,
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone_number: formData.phone,
+          message: formData.description,
+        }),
+      });
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+      console.log("Response status:", response.status);
 
-    setTimeout(() => {
-      setIsSuccess(false);
-      setFormData({ name: "", phone: "", description: "" });
-      onClose?.();
-    }, 2000);
+      const responseData = await response.json().catch(() => null);
+      console.log("Response data:", responseData);
+
+      if (!response.ok) {
+        throw new Error(
+          responseData?.detail ||
+            responseData?.message ||
+            "Не удалось отправить сообщение",
+        );
+      }
+
+      setIsSubmitting(false);
+      setIsSuccess(true);
+
+      setTimeout(() => {
+        setIsSuccess(false);
+        setFormData({ name: "", phone: "", description: "" });
+        setTurnstileToken("");
+        if (turnstileWidgetId.current && window.turnstile) {
+          window.turnstile.reset(turnstileWidgetId.current);
+        }
+        onClose?.();
+      }, 2000);
+    } catch (err) {
+      console.error("Submission error:", err);
+      setError(err.message || "Произошла ошибка. Попробуйте еще раз.");
+      setIsSubmitting(false);
+
+      // Reset Turnstile on error
+      if (turnstileWidgetId.current && window.turnstile) {
+        window.turnstile.reset(turnstileWidgetId.current);
+        setTurnstileToken("");
+      }
+    }
   };
 
   if (!isOpen) return null;
@@ -78,6 +184,12 @@ const ContactUsModal = ({ isOpen, onClose }) => {
           }
         }
         
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-10px); }
+          75% { transform: translateX(10px); }
+        }
+        
         .contact-modal-overlay {
           animation: overlayFadeIn 0.3s ease-out;
         }
@@ -118,6 +230,18 @@ const ContactUsModal = ({ isOpen, onClose }) => {
         .form-field:nth-child(2) { animation-delay: 0.2s; }
         .form-field:nth-child(3) { animation-delay: 0.3s; }
         .form-field:nth-child(4) { animation-delay: 0.4s; }
+        .form-field:nth-child(5) { animation-delay: 0.5s; }
+        
+        .error-shake {
+          animation: shake 0.4s ease-in-out;
+        }
+
+        .turnstile-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 65px;
+        }
       `}</style>
 
       <div
@@ -171,6 +295,28 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                     ответим как можно скорее.
                   </p>
                 </div>
+
+                {/* Error Message */}
+                {error && (
+                  <div className="error-shake mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <p className="text-red-600 text-sm font-medium flex items-center gap-2">
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      {error}
+                    </p>
+                  </div>
+                )}
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-7">
@@ -243,10 +389,15 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                     <div className="input-line"></div>
                   </div>
 
+                  {/* Turnstile Widget */}
+                  <div className="form-field turnstile-wrapper">
+                    <div id="turnstile-container"></div>
+                  </div>
+
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !turnstileToken}
                     className="form-field relative w-full py-4 bg-neutral-900 hover:bg-neutral-800 text-white font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden group mt-8"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2 uppercase tracking-wider text-sm">

@@ -1,5 +1,6 @@
 "use client";
 
+import Head from "next/head";
 import Footer from "@/components/footer";
 import { motion, useInView } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
@@ -28,12 +29,32 @@ export default function Home() {
   const processInView = useInView(processRef, { once: true, margin: "-100px" });
 
   return (
-    <Wrapper
-      modalIsOpen={isModalOpen}
-      setModalIsOpen={setIsModalOpen}
-      className="bg-white"
-    >
-      <main>
+    <>
+      <Head>
+        <title>Asabiyya.uz — Оконный Мастер: окна и двери в Ташкенте</title>
+        <meta
+          name="description"
+          content="Asabiyya.uz — производство и установка окон, дверей и фасадов в Ташкенте. Бесплатный замер, быстрый монтаж и гарантия качества."
+        />
+        <link rel="canonical" href="https://asabiyya.uz/" />
+        <meta property="og:title" content="Asabiyya.uz — Оконный Мастер" />
+        <meta
+          property="og:description"
+          content="Окна, двери и фасады в Ташкенте. Бесплатный замер, производство и монтаж с гарантией."
+        />
+        <meta property="og:url" content="https://asabiyya.uz/" />
+        <meta
+          property="og:image"
+          content="https://asabiyya.uz/images/engelberg5.png"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
+      <Wrapper
+        modalIsOpen={isModalOpen}
+        setModalIsOpen={setIsModalOpen}
+        className="bg-white"
+      >
+        <main>
         {/* HERO SECTION - RESPONSIVE & ADAPTIVE */}
         <section className="relative h-screen min-h-150 w-full overflow-hidden">
           <motion.div
@@ -758,7 +779,8 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
-    </Wrapper>
+        </main>
+      </Wrapper>
+    </>
   );
 }

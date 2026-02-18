@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useState } from "react";
 import Image from "next/image";
 import Wrapper from "@/layouts/Wrapper";
@@ -49,8 +50,28 @@ const Index = () => {
   ];
 
   return (
-    <Wrapper modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
-      <div className="min-h-screen bg-gradient-to-b from-white via-neutral-50 to-white">
+    <>
+      <Head>
+        <title>Двери в Ташкенте — входные и панорамные | Asabiyya.uz</title>
+        <meta
+          name="description"
+          content="Asabiyya.uz производит и устанавливает входные, панорамные и раздвижные двери в Ташкенте. Бесплатный замер и гарантия качества."
+        />
+        <link rel="canonical" href="https://asabiyya.uz/dveri" />
+        <meta property="og:title" content="Двери в Ташкенте — Asabiyya.uz" />
+        <meta
+          property="og:description"
+          content="Надежные двери для дома и бизнеса: замер, производство и монтаж в Ташкенте."
+        />
+        <meta property="og:url" content="https://asabiyya.uz/dveri" />
+        <meta
+          property="og:image"
+          content="https://asabiyya.uz/images/engelberg6.png"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
+      <Wrapper modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
+        <div className="min-h-screen bg-gradient-to-b from-white via-neutral-50 to-white">
         {/* Hero */}
         <section className="relative overflow-hidden bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white">
           <div className="absolute inset-0 opacity-15">
@@ -182,8 +203,9 @@ const Index = () => {
             </button>
           </div>
         </section>
-      </div>
-    </Wrapper>
+        </div>
+      </Wrapper>
+    </>
   );
 };
 

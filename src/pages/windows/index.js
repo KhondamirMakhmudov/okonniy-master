@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useState } from "react";
 import Image from "next/image";
 import Sidebar from "@/components/sidebar";
@@ -113,8 +114,31 @@ const Index = () => {
   };
 
   return (
-    <Wrapper modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
-      <div className="flex">
+    <>
+      <Head>
+        <title>Окна ПВХ и алюминиевые окна в Ташкенте — Asabiyya.uz</title>
+        <meta
+          name="description"
+          content="Каталог окон Asabiyya.uz: ПВХ и алюминиевые системы Akfa и Engelberg. Бесплатный замер и профессиональный монтаж в Ташкенте."
+        />
+        <link rel="canonical" href="https://asabiyya.uz/windows" />
+        <meta
+          property="og:title"
+          content="Окна ПВХ и алюминиевые окна — Asabiyya.uz"
+        />
+        <meta
+          property="og:description"
+          content="ПВХ и алюминиевые окна в Ташкенте. Выберите систему Akfa или Engelberg, получите замер и расчет."
+        />
+        <meta property="og:url" content="https://asabiyya.uz/windows" />
+        <meta
+          property="og:image"
+          content="https://asabiyya.uz/images/engelberg3.png"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
+      <Wrapper modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
+        <div className="flex">
         <Sidebar onCompanySelect={handleCompanySelect} />
 
         <div className="flex-1 bg-white">
@@ -265,8 +289,9 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </div>
-    </Wrapper>
+        </div>
+      </Wrapper>
+    </>
   );
 };
 

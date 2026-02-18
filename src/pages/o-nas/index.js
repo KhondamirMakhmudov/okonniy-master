@@ -9,6 +9,7 @@ import {
   Target,
   HeadphonesIcon,
 } from "lucide-react";
+import Head from "next/head";
 import { useState } from "react";
 
 const Index = () => {
@@ -53,8 +54,31 @@ const Index = () => {
   ];
 
   return (
-    <Wrapper modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-white">
+    <>
+      <Head>
+        <title>О компании Asabiyya.uz — Оконный Мастер</title>
+        <meta
+          name="description"
+          content="О компании Asabiyya.uz: опыт, команда и контроль качества. Производство и установка окон, дверей и фасадов в Ташкенте."
+        />
+        <link rel="canonical" href="https://asabiyya.uz/o-nas" />
+        <meta
+          property="og:title"
+          content="О компании Asabiyya.uz — Оконный Мастер"
+        />
+        <meta
+          property="og:description"
+          content="История, команда и качество Asabiyya.uz. Работаем в Ташкенте с гарантией результата."
+        />
+        <meta property="og:url" content="https://asabiyya.uz/o-nas" />
+        <meta
+          property="og:image"
+          content="https://asabiyya.uz/images/engelberg5.png"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
+      <Wrapper modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-white">
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-20 md:py-32 px-6">
           <div className="absolute inset-0 opacity-10">
@@ -233,8 +257,9 @@ const Index = () => {
             </button>
           </div>
         </section>
-      </div>
-    </Wrapper>
+        </div>
+      </Wrapper>
+    </>
   );
 };
 

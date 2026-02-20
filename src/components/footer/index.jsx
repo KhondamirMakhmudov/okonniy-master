@@ -47,7 +47,7 @@ const Footer = () => {
             {/* Social Links */}
             <div className="flex items-center gap-3 sm:gap-4">
               <a
-                href="#"
+                href="https://t.me/asabiyya_callcenter"
                 className="w-11 h-11 sm:w-10 sm:h-10 border border-neutral-200 flex items-center justify-center text-neutral-400 hover:text-black hover:border-black transition-all duration-300 active:scale-95"
                 aria-label="Telegram"
               >
@@ -117,17 +117,17 @@ const Footer = () => {
             <div className="space-y-3 sm:space-y-4">
               <div>
                 <p className="text-sm text-neutral-600 font-light leading-relaxed">
-                  г. Ташкент, Юнусабадский р-н
+                  Index, блок D01, 100146,
                   <br />
-                  ул. Амира Темура, 107Б
+                  Янгихаётский район, Ташкент, Узбекистан
                 </p>
               </div>
               <div className="pt-1 sm:pt-2">
                 <a
-                  href="tel:+998979733333"
+                  href="tel:+998971233333"
                   className="text-base sm:text-lg text-black font-light hover:opacity-60 transition-opacity inline-block active:opacity-40"
                 >
-                  +998 (97) 973-33-33
+                  +998 (97) 123-33-33
                 </a>
               </div>
               <div>
@@ -180,8 +180,8 @@ const Footer = () => {
               Режим работы
             </h5>
             <div className="space-y-2.5 sm:space-y-3 text-sm text-neutral-600 font-light">
-              <p>Пн - Пт: 9:00 - 18:00</p>
-              <p>Суббота: 10:00 - 16:00</p>
+              <p>Пн - Сб: 9:00 - 18:00</p>
+              {/* <p>Суббота: 10:00 - 16:00</p> */}
               <p>Воскресенье: Выходной</p>
             </div>
           </div>
@@ -189,14 +189,14 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="py-6 sm:py-8 border-t border-neutral-200">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6">
+          <div className="flex flex-col md:flex-row justify-center items-center md:items-center gap-4 sm:gap-6">
             {/* Copyright */}
             <div className="text-xs text-neutral-400 font-light order-2 md:order-1">
               © 2026 Оконный Мастер. Все права защищены.
             </div>
 
             {/* Legal Links */}
-            <div className="flex flex-wrap gap-4 sm:gap-6 text-xs text-neutral-400 font-light order-1 md:order-2">
+            {/* <div className="flex flex-wrap gap-4 sm:gap-6 text-xs text-neutral-400 font-light order-1 md:order-2">
               <a
                 href="#privacy"
                 className="hover:text-black transition-colors active:opacity-60 py-1"
@@ -215,7 +215,7 @@ const Footer = () => {
               >
                 Документация
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

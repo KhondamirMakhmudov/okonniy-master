@@ -9,6 +9,12 @@ import Wrapper from "@/layouts/Wrapper";
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const mapUrl =
+    "https://maps.google.com/maps?q=41.197530,69.239014&ll=41.197530,69.239014&z=16";
+  const mapEmbedUrl =
+    mapUrl.includes("/maps/embed") || mapUrl.includes("output=embed")
+      ? mapUrl
+      : `${mapUrl}${mapUrl.includes("?") ? "&" : "?"}output=embed`;
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -788,6 +794,80 @@ export default function Home() {
                     <div className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-medium">
                       Лет службы
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* CONTACT & MAP SECTION */}
+          <section
+            className="relative w-full bg-neutral-50 overflow-hidden"
+            id="contact-section"
+          >
+            <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                <div>
+                  <div className="flex items-baseline gap-6 mb-4">
+                    <span className="text-xs tracking-[0.3em] uppercase text-neutral-400 font-light">
+                      Контакты
+                    </span>
+                    <div className="h-[1px] flex-1 bg-neutral-200" />
+                  </div>
+                  <h2 className="text-4xl lg:text-6xl tracking-tight text-black mb-6">
+                    Наше местоположение
+                  </h2>
+                  <p className="text-neutral-500 text-lg font-light leading-relaxed mb-8 max-w-xl">
+                    Заезжайте в шоурум или приходите в офис — будем рады вас
+                    встретить и помочь с выбором.
+                  </p>
+
+                  <div className="space-y-4 text-sm text-neutral-600 font-light">
+                    <div>
+                      <div className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 mb-2 font-medium">
+                        Адрес
+                      </div>
+                      <p>
+                        Index, блок D01, 100146,
+                        <br />
+                        Янгихаётский район, Ташкент, Узбекистан
+                      </p>
+                    </div>
+                    <div>
+                      <div className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 mb-2 font-medium">
+                        Телефон
+                      </div>
+                      <a
+                        href="tel:+998971233333"
+                        className="text-base text-black font-light hover:opacity-60 transition-opacity inline-block active:opacity-40"
+                      >
+                        +998 (97) 123-33-33
+                      </a>
+                    </div>
+                    <div>
+                      <div className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 mb-2 font-medium">
+                        Email
+                      </div>
+                      <a
+                        href="mailto:info@okonmaster.uz"
+                        className="text-sm text-neutral-600 font-light hover:text-black transition-colors inline-block active:opacity-60"
+                      >
+                        info@okonmaster.uz
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-full">
+                  <div className="aspect-[4/3] w-full overflow-hidden border border-neutral-200 bg-white">
+                    <iframe
+                      title="Карта — Оконный Мастер"
+                      src={mapEmbedUrl}
+                      className="w-full h-full"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      allowFullScreen
+                    />
                   </div>
                 </div>
               </div>

@@ -505,7 +505,7 @@ export default function Home() {
                       { label: "Камеры", value: "4-камерная система" },
                       { label: "Глубина", value: "60 мм" },
                       { label: "Макс. габариты", value: "3000 × 2400 мм" },
-                      { label: "Стекло", value: "4 – 32 мм" },
+                      { label: "Стекло", value: "4 – 20 мм" },
                     ],
                     performance: [
                       { label: "Теплосбережение", value: 85 },
@@ -519,7 +519,7 @@ export default function Home() {
                       { label: "Камеры", value: "3-камерная система" },
                       { label: "Глубина", value: "60 мм" },
                       { label: "Макс. габариты", value: "2800 × 2200 мм" },
-                      { label: "Стекло", value: "4 – 24 мм" },
+                      { label: "Стекло", value: "4 – 20 мм" },
                     ],
                     performance: [
                       { label: "Теплосбережение", value: 75 },

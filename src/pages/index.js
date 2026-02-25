@@ -510,8 +510,10 @@ export default function Home() {
                     specs: [
                       { label: "Камеры", value: "4-камерная система" },
                       { label: "Глубина", value: "60 мм" },
-                      { label: "Макс. габариты", value: "3000 × 2400 мм" },
-                      { label: "Стекло", value: "4 – 20 мм" },
+                      { label: "Макс высота створки", value: "1800 мм" },
+                      { label: "Макс ширина створки", value: "650 мм" },
+                      { label: "Толщина стеклопакета", value: "20 мм" },
+                      { label: "Монтажная плоскость", value: "60 мм" },
                     ],
                     performance: [
                       { label: "Теплосбережение", value: 85 },
@@ -523,9 +525,10 @@ export default function Home() {
                     model: "Trio 6000",
                     specs: [
                       { label: "Камеры", value: "3-камерная система" },
-                      { label: "Глубина", value: "60 мм" },
-                      { label: "Макс. габариты", value: "2800 × 2200 мм" },
-                      { label: "Стекло", value: "4 – 20 мм" },
+                      { label: "Монтажная плоскость", value: "60 мм" },
+                      { label: "Макс высота створки", value: "1800 мм" },
+                      { label: "Макс ширина створки", value: "800 мм" },
+                      { label: "Толщина стеклопакета", value: "20 мм" },
                     ],
                     performance: [
                       { label: "Теплосбережение", value: 75 },
@@ -674,11 +677,17 @@ export default function Home() {
                     badgeColor: "bg-black",
                     model: "TERMO 70",
                     specs: [
-                      { label: "Глубина створки", value: "70 мм" },
-                      { label: "Видимая ширина", value: "92 мм" },
-                      { label: "Терморазрыв", value: "34 мм Polyamide" },
-                      { label: "Толщина заполнения", value: "до 52 мм" },
-                      { label: "Теплопотери (Uf)", value: "1.7 W/m²K" },
+                      { label: "Глубина створки", value: "75.5 мм" },
+                      {
+                        label: "Ширина видимой части створки",
+                        value: "67-112 мм",
+                      },
+                      { label: "Ширина термомоста", value: "24 мм" },
+                      { label: "Толщина заполнения", value: "10-50 мм" },
+                      {
+                        label: "Номинальное значение теплопотерь",
+                        value: "2.92 W/m²K",
+                      },
                     ],
                   },
                   {
@@ -686,11 +695,17 @@ export default function Home() {
                     badgeColor: "bg-neutral-400",
                     model: "TERMO 65",
                     specs: [
-                      { label: "Глубина створки", value: "65 мм" },
-                      { label: "Видимая ширина", value: "85 мм" },
-                      { label: "Терморазрыв", value: "24 мм Polyamide" },
-                      { label: "Толщина заполнения", value: "до 44 мм" },
-                      { label: "Теплопотери (Uf)", value: "2.1 W/m²K" },
+                      { label: "Глубина створки", value: "72 мм" },
+                      {
+                        label: "Ширина видимой части створки",
+                        value: "67-102 мм",
+                      },
+                      { label: "Ширина термомоста", value: "24 мм" },
+                      { label: "Толщина заполнения", value: "6-32 мм" },
+                      {
+                        label: "Номинальное значение теплопотерь",
+                        value: "2.92 W/m²K",
+                      },
                     ],
                   },
                 ].map((product, index) => (

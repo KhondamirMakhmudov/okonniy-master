@@ -864,10 +864,10 @@ export default function Home() {
                         Email
                       </div>
                       <a
-                        href="mailto:info@okonmaster.uz"
+                        href="mailto:callcenter@asabiyya.uz"
                         className="text-sm text-neutral-600 font-light hover:text-black transition-colors inline-block active:opacity-60"
                       >
-                        info@okonmaster.uz
+                        callcenter@asabiyya.uz
                       </a>
                     </div>
                   </div>

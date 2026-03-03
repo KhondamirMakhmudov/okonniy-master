@@ -76,10 +76,10 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
             {/* Contact CTA */}
             <div className="hidden lg:flex items-center gap-5">
               <a
-                href="tel:+998979733333"
+                href="tel:+998971233333"
                 className="text-[13px] font-medium text-black/60 hover:text-black transition-colors"
               >
-                +998 97 973 33 33
+                +998 97 123 33 33
               </a>
               <button
                 onClick={() => setIsModalOpen(true)}
@@ -160,8 +160,9 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
               transition: "all 300ms ease-in-out",
             }}
           >
-            <a href="tel:+998901234567" className="block text-lg text-black/60">
-              +998 90 123 45 67
+            <a href="tel:+998971233333" className="block text-lg text-black/60">
+              +998 97 123 33 33
+
             </a>
             <button
               onClick={() => {

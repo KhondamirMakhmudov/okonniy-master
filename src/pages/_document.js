@@ -4,34 +4,49 @@ export default function Document() {
   return (
     <Html lang="ru">
       <Head>
-        <title>
-          Оконный Мастер - Установка окон, дверей и балконов в Ташкенте
-        </title>
+        <title>Asabiyya.uz — Оконный Мастер в Ташкенте</title>
         <meta
           name="description"
-          content="Оконный Мастер - профессиональная установка пластиковых окон, дверей и балконов в Ташкенте. Бесплатный замер, качественное производство, быстрая установка с уборкой. Лучшие мастера своего дела!"
+          content="Asabiyya.uz — Оконный Мастер: установка пластиковых окон, дверей и фасадов в Ташкенте. Бесплатный замер, производство, монтаж с гарантией."
         />
-
         <meta
           name="keywords"
-          content="Оконный Мастер, установка окон Ташкент, пластиковые окна, окна ПВХ, балконы под ключ, остекление балконов, двери входные, межкомнатные двери, бесплатный замер окон, установка окон цена, окна Узбекистан"
+          content="asabiyya.uz, Asabiyya, Оконный Мастер, установка окон Ташкент, пластиковые окна Ташкент, окна ПВХ, алюминиевые окна, фасадные системы, двери, балконы под ключ, остекление балконов, бесплатный замер, монтаж окон, окна Узбекистан"
         />
-
         <meta name="robots" content="index, follow" />
+        <meta name="author" content="Asabiyya.uz" />
+        <meta name="application-name" content="Asabiyya.uz" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="theme-color" content="#111121" />
+        <link rel="canonical" href="https://asabiyya.uz/" />
 
         <meta
           property="og:title"
-          content="Оконный Мастер - Установка окон, дверей и балконов"
+          content="Asabiyya.uz — Оконный Мастер в Ташкенте"
         />
-
         <meta
           property="og:description"
-          content="Профессиональная установка пластиковых окон, дверей и балконов. Бесплатный замер, качественное производство, установка с уборкой. Оконный Мастер - лучший мастер своего дела!"
+          content="Установка пластиковых окон, дверей и фасадов в Ташкенте. Бесплатный замер, производство и монтаж с гарантией."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Asabiyya.uz" />
+        <meta property="og:locale" content="ru_RU" />
+        <meta property="og:url" content="https://asabiyya.uz/" />
+        <meta
+          property="og:image"
+          content="https://asabiyya.uz/images/engelberg5.png"
         />
 
-        <meta property="og:type" content="website" />
-
-        <meta name="author" content="Оконный Мастер" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Asabiyya.uz — Оконный Мастер" />
+        <meta
+          name="twitter:description"
+          content="Окна, двери и фасады в Ташкенте. Бесплатный замер, производство и монтаж с гарантией."
+        />
+        <meta
+          name="twitter:image"
+          content="https://asabiyya.uz/images/engelberg5.png"
+        />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

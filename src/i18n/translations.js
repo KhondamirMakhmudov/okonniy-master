@@ -10,7 +10,7 @@ const translations = {
     // Header
     brandTitle: "Оконный Мастер",
     consultation: "Консультация",
-    phone: "+998 97 973 33 33",
+    phone: "+998 97 123 33 33",
 
     // Hero Section
     premiumQuality: "Премиум качества",
@@ -349,7 +349,7 @@ const translations = {
     // Header
     brandTitle: "Oyna Ustasi",
     consultation: "Konsultatsiya",
-    phone: "+998 97 973 33 33",
+    phone: "+998 97 123 33 33",
 
     // Hero Section
     premiumQuality: "Premium sifat",

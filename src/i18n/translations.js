@@ -343,7 +343,8 @@ const translations = {
     footerDescription:
       "Ваш надежный партнер в мире светопрозрачных конструкций. Качество, проверенное временем и тысячами довольных клиентов в Ташкенте.",
     footerContacts: "Контакты",
-    footerAddress: "Index, блок D01, 100146, Янгихаётский район, Ташкент, Узбекистан",
+    footerAddress:
+      "Index, блок D01, 100146, Янгихаётский район, Ташкент, Узбекистан",
     footerNavigation: "Навигация",
     footerPvcWindows: "ПВХ окна",
     footerAluminumWindows: "Алюминиевые окна",
@@ -698,7 +699,8 @@ const translations = {
     footerDescription:
       "Shaffof tuzilishlar dunyosida sizning ishonchli hamkoringiz. Vaqti va minglab qanoatli mijozlar orqali tekshirilgan sifat Toshkentda.",
     footerContacts: "Kontaktlar",
-    footerAddress: "Index, blok D01, 100146, Yangihayt tumani, Toshkent, O'zbekiston",
+    footerAddress:
+      "Index, blok D01, 100146, Yangihayt tumani, Toshkent, O'zbekiston",
     footerNavigation: "Navigatsiya",
     footerPvcWindows: "PVH oynalar",
     footerAluminumWindows: "Alyuminiy oynalar",

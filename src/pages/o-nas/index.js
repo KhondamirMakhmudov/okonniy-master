@@ -52,9 +52,9 @@ const Index = () => {
 
   return (
     <Wrapper modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-white">
+      <div className="min-h-screen bg-linear-to-br from-gray-50 via-gray-100 to-white">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-20 md:py-32 px-6">
+        <section className="relative overflow-hidden bg-linear-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-20 md:py-32 px-6">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_35px,rgba(255,255,255,.05)_35px,rgba(255,255,255,.05)_70px)]"></div>
           </div>

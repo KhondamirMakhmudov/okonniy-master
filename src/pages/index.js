@@ -1,11 +1,13 @@
 "use client";
 
 import Footer from "@/components/footer";
-import { motion, useInView } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import Wrapper from "@/layouts/Wrapper";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Home() {
+  const { t, isLoaded } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -15,17 +17,7 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Refs for scroll-triggered animations
-  const materialsRef = useRef(null);
-  const processRef = useRef(null);
-  const pvcRef = useRef(null);
-  const aluminumRef = useRef(null);
-
-  const materialsInView = useInView(materialsRef, {
-    once: true,
-    margin: "-100px",
-  });
-  const processInView = useInView(processRef, { once: true, margin: "-100px" });
+  if (!isLoaded) return null;
 
   return (
     <Wrapper
@@ -59,7 +51,7 @@ export default function Home() {
               <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 border border-white/20 backdrop-blur-sm bg-white/5 rounded-full">
                 <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full animate-pulse" />
                 <span className="text-white/90 text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase font-light">
-                  Премиум качества
+                  {t("premiumQuality")}
                 </span>
               </div>
             </motion.div>
@@ -70,8 +62,9 @@ export default function Home() {
               transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
               className="text-white text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-extralight tracking-tight mb-4 sm:mb-6 md:mb-8 max-w-6xl leading-[1.1] sm:leading-[1.05] px-2"
             >
-              Оконный Мастер —<br />
-              <span className="block mt-1 sm:mt-2">мастер своего дела</span>
+              {t("heroTitle")}
+              <br />
+              <span className="block mt-1 sm:mt-2">{t("heroSubtitle")}</span>
             </motion.h1>
 
             <motion.p
@@ -80,7 +73,7 @@ export default function Home() {
               transition={{ duration: 1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="text-white/70 text-sm sm:text-base md:text-lg lg:text-xl font-light max-w-2xl mb-8 sm:mb-10 md:mb-12 leading-relaxed px-2"
             >
-              Сервис премиального уровня для заказа окон и дверей в Ташкенте
+              {t("heroDescription")}
             </motion.p>
 
             <motion.div
@@ -95,7 +88,7 @@ export default function Home() {
               >
                 <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-3">
                   <span className="whitespace-nowrap">
-                    Заказать бесплатный замер
+                    {t("orderFreeMeasurement")}
                   </span>
                   <svg
                     className="w-3 h-3 sm:w-4 sm:h-4 transform group-hover:translate-x-1 transition-transform duration-300 shrink-0"
@@ -115,7 +108,7 @@ export default function Home() {
                 <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <span className="text-white text-[10px] sm:text-xs md:text-sm tracking-[0.1em] sm:tracking-[0.15em] uppercase font-medium flex items-center gap-2 sm:gap-3">
                     <span className="whitespace-nowrap">
-                      Заказать бесплатный замер
+                      {t("orderFreeMeasurement")}
                     </span>
                     <svg
                       className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0"
@@ -151,7 +144,7 @@ export default function Home() {
                 className="flex flex-col items-center gap-2"
               >
                 <span className="text-white/50 text-[10px] sm:text-xs tracking-[0.2em] uppercase font-light">
-                  Scroll
+                  {t("scroll")}
                 </span>
                 <svg
                   className="w-5 h-5 sm:w-6 sm:h-6 text-white/50"
@@ -194,10 +187,10 @@ export default function Home() {
             <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pb-6 sm:pb-8 md:pb-12">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
                 {[
-                  { value: "15+", label: "Лет опыта" },
-                  { value: "2000+", label: "Проектов" },
-                  { value: "100%", label: "Качество" },
-                  { value: "5 лет", label: "Гарантия" },
+                  { value: "15+", label: t("aboutYears") || "Лет опыта" },
+                  { value: "2000+", label: t("aboutProjects") || "Проектов" },
+                  { value: "100%", label: t("aboutQuality") || "Качество" },
+                  { value: "5 лет", label: t("aboutWarranty") || "Гарантия" },
                 ].map((stat, index) => (
                   <motion.div
                     key={index}
@@ -221,41 +214,43 @@ export default function Home() {
 
         {/* MATERIALS SECTION - ANIMATED */}
         <section
-          ref={materialsRef}
           className="relative w-full bg-neutral-50 overflow-hidden"
           id="materials"
         >
           <div className="max-w-[1600px] mx-auto px-6 lg:px-12 pt-32 pb-20">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
-              animate={materialsInView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true, margin: "-100px" }}
               className="max-w-3xl"
             >
               <motion.span
                 initial={{ opacity: 0, x: -20 }}
-                animate={materialsInView ? { opacity: 1, x: 0 } : {}}
+                whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
                 className="text-xs tracking-[0.3em] uppercase text-neutral-400 font-light mb-4 block"
               >
-                Материалы
+                {t("materialsTitle")}
               </motion.span>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
-                animate={materialsInView ? { opacity: 1, y: 0 } : {}}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
                 className="text-5xl lg:text-7xl tracking-tight text-black leading-[0.95] mb-8"
               >
-                Точность в каждой детали
+                {t("materialsHeading")}
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
-                animate={materialsInView ? { opacity: 1, y: 0 } : {}}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
+                viewport={{ once: true }}
                 className="text-neutral-500 text-lg font-light leading-relaxed max-w-xl"
               >
-                Мы работаем только с материалами высочайшего качества,
-                проверенными временем и технологиями.
+                {t("materialsFullDesc")}
               </motion.p>
             </motion.div>
           </div>
@@ -265,15 +260,15 @@ export default function Home() {
               {[
                 {
                   num: "01",
-                  title: "Натуральное дерево",
-                  desc: "Экологически чистый дуб и орех, обработанные для вечной службы и природного тепла вашего дома.",
+                  titleKey: "woodTitle",
+                  descKey: "woodDesc",
                   img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDXwko1h3stHd5CFbPT_Ongx2ObEHYsd0ckqNBM_uqN1NlVudFqYCJb6uJTMSlCZyFLfUa-ULlSZjhB3xLJ_nrIX1neB7w2jHS58Dq1Friv8G1-mKvyDyoYFG7W6GEfCOuMjTuWv2Skad29rMvXpkXdmr5e6ACjj8IL93AefMxRDj0q32keyplXP2_KUzoUWAWLwnxxdhP7uCDjpdyNuySxyG7oYuqysoJDHTnGaeZu1tAcHSsu5-cDLP3tB_-09NzVj7v8-R4hmPfF",
                   link: "#wood",
                 },
                 {
                   num: "02",
-                  title: "Современный металл",
-                  desc: "Аэрокосмический алюминий с терморазрывом для безупречной прочности и минималистичного дизайна.",
+                  titleKey: "modernMetalTitle",
+                  descKey: "modernMetalDesc",
                   img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCjQyVTnEnYUIFPU3TJUEkTeZE7W3bT35-PzH9X9LCVfTWPFRQeWLa60Nxl6PGHGb3-JA4b0gK1vk1p4Ym1ZE5RjmEKIjRCXvtQttmQCAdOBBGQDpmG3xgywMxrQycG0OWNqY7XRGtaYFNBj87SkaA4EzQZb1rFp7pFlV9PMDaLut9Gc63jq9EJVSYy2AOVlLzsqAhyOTuvLjlHcx5w5zJdOC5BpAtmBVjKMVkGn8Uw3Xtt1nEDDpUZbmz0Wx9hi2f36SBIpfRhVtvj",
                   link: "#metal",
                 },
@@ -281,12 +276,13 @@ export default function Home() {
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 60 }}
-                  animate={materialsInView ? { opacity: 1, y: 0 } : {}}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{
                     duration: 0.8,
                     delay: 0.5 + index * 0.2,
                     ease: [0.22, 1, 0.36, 1],
                   }}
+                  viewport={{ once: true, margin: "-100px" }}
                   className="group relative h-[600px] overflow-hidden bg-black"
                 >
                   <motion.div
@@ -304,10 +300,9 @@ export default function Home() {
                     <div className="absolute top-10 right-10 lg:top-16 lg:right-16">
                       <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
-                        animate={
-                          materialsInView ? { opacity: 1, scale: 1 } : {}
-                        }
+                        whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6, delay: 0.8 + index * 0.2 }}
+                        viewport={{ once: true }}
                         className="w-16 h-16 border border-white/20 flex items-center justify-center"
                       >
                         <span className="text-white/40 text-sm font-light">
@@ -317,20 +312,20 @@ export default function Home() {
                     </div>
                     <div className="mb-8">
                       <h3 className="text-white text-4xl lg:text-5xl font-extralight tracking-tight mb-4 leading-none">
-                        {material.title.split(" ")[0]}
+                        {t(material.titleKey).split(" ")[0]}
                         <br />
-                        {material.title.split(" ").slice(1).join(" ")}
+                        {t(material.titleKey).split(" ").slice(1).join(" ")}
                       </h3>
                       <div className="w-16 h-[1px] bg-white/30 group-hover:w-32 transition-all duration-700" />
                     </div>
                     <p className="text-white/60 text-sm lg:text-base font-light leading-relaxed max-w-md mb-8 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100">
-                      {material.desc}
+                      {t(material.descKey)}
                     </p>
                     <a
                       href={material.link}
                       className="inline-flex items-center gap-3 text-white text-xs tracking-[0.2em] uppercase font-medium group-hover:gap-5 transition-all duration-500"
                     >
-                      <span>Узнать больше</span>
+                      <span>{t("learnMore")}</span>
                       <svg
                         className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-500"
                         fill="none"
@@ -354,32 +349,34 @@ export default function Home() {
 
         {/* PROCESS SECTION - ANIMATED */}
         <section
-          ref={processRef}
           className="relative w-full bg-white overflow-hidden"
           id="process"
         >
           <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-32">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
-              animate={processInView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
+              viewport={{ once: true, margin: "-100px" }}
               className="mb-20"
             >
               <motion.span
                 initial={{ opacity: 0, x: -20 }}
-                animate={processInView ? { opacity: 1, x: 0 } : {}}
+                whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
                 className="text-xs tracking-[0.3em] uppercase text-neutral-400 font-light mb-4 block"
               >
-                Процесс
+                {t("processTitle") || "Процесс"}
               </motion.span>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
-                animate={processInView ? { opacity: 1, y: 0 } : {}}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
                 className="text-5xl lg:text-7xl  tracking-tight text-black mb-6"
               >
-                Как мы работаем
+                {t("processSection") || "Как мы работаем"}
               </motion.h2>
             </motion.div>
 
@@ -387,43 +384,45 @@ export default function Home() {
               {[
                 {
                   num: "01",
-                  title: "Заявка",
-                  desc: "Профессиональная консультация и подбор решений под ваш интерьер",
+                  title: t("step1"),
+                  desc: t("step1Desc"),
                 },
                 {
                   num: "02",
-                  title: "Замеры",
-                  desc: "Бесплатный выезд мастера для точного измерения и оценки проемов",
+                  title: t("step2"),
+                  desc: t("step2Desc"),
                 },
                 {
                   num: "03",
-                  title: "Производство",
-                  desc: "Высокотехнологичное изготовление на современном оборудовании",
+                  title: t("step3"),
+                  desc: t("step3Desc"),
                 },
                 {
                   num: "04",
-                  title: "Монтаж",
-                  desc: "Чистая установка и финальная настройка фурнитуры нашими мастерами",
+                  title: t("step4"),
+                  desc: t("step4Desc"),
                 },
               ].map((step, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 40 }}
-                  animate={processInView ? { opacity: 1, y: 0 } : {}}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{
                     duration: 0.8,
                     delay: 0.4 + index * 0.15,
                     ease: [0.22, 1, 0.36, 1],
                   }}
+                  viewport={{ once: true, margin: "-100px" }}
                   className="relative group"
                 >
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
-                    animate={processInView ? { opacity: 1, scale: 1 } : {}}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     transition={{
                       duration: 0.6,
                       delay: 0.6 + index * 0.15,
                     }}
+                    viewport={{ once: true }}
                     className="text-[80px] font-extralight text-neutral-300 absolute -top-2 -left-2 group-hover:text-neutral-200 transition-colors"
                   >
                     {step.num}
@@ -451,16 +450,15 @@ export default function Home() {
             <div className="mb-20">
               <div className="flex items-baseline gap-6 mb-4">
                 <span className="text-xs tracking-[0.3em] uppercase text-neutral-400 font-light">
-                  01 / Продукция
+                  {t("productLabel1")}
                 </span>
                 <div className="h-[1px] flex-1 bg-neutral-200" />
               </div>
               <h2 className="text-5xl lg:text-7xl  tracking-tight text-black mb-6">
-                ПВХ окна
+                {t("pvhWindowsTitle")}
               </h2>
               <p className="text-neutral-500 text-lg font-light leading-relaxed max-w-2xl">
-                Энергоэффективные решения премиум-класса для комфортного
-                микроклимата вашего дома
+                {t("pvhWindowsDesc")}
               </p>
             </div>
 
@@ -568,7 +566,7 @@ export default function Home() {
                     </div>
 
                     <button className="w-full py-4 bg-black text-white text-xs tracking-[0.2em] uppercase font-medium hover:bg-neutral-800 transition-colors duration-300">
-                      Заказать расчет
+                      {t("orderCalculationBtn")}
                     </button>
                   </div>
                 </div>
@@ -579,27 +577,23 @@ export default function Home() {
               <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-white/5 to-transparent" />
               <div className="max-w-3xl relative">
                 <h4 className="text-2xl lg:text-3xl font-extralight mb-6 tracking-tight">
-                  Надежность и энергоэффективность
+                  {t("reliability")}
                 </h4>
                 <p className="text-white/60 font-light leading-relaxed mb-10 text-base">
-                  Наши ПВХ системы объединяют в себе передовые технологии
-                  теплосбережения и исключительную долговечность. Благодаря
-                  многокамерной структуре и качественному уплотнению, окна
-                  обеспечивают высокий коэффициент светопропускания при
-                  минимальных теплопотерях.
+                  {t("reliabilityDesc")}
                 </p>
                 <div className="flex flex-wrap gap-8 text-xs tracking-[0.2em] uppercase font-medium">
                   <div className="flex items-center gap-2">
                     <span className="w-1 h-1 bg-white rounded-full" />
-                    40 лет гарантии
+                    {t("aboutWarranty")}
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-1 h-1 bg-white rounded-full" />
-                    Эко-материалы
+                    {t("ecoMaterials")}
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-1 h-1 bg-white rounded-full" />
-                    Сертифицировано
+                    {t("certified")}
                   </div>
                 </div>
               </div>
@@ -613,16 +607,15 @@ export default function Home() {
             <div className="mb-20">
               <div className="flex items-baseline gap-6 mb-4">
                 <span className="text-xs tracking-[0.3em] uppercase text-neutral-400 font-light">
-                  02 / Продукция
+                  {t("productLabel2")}
                 </span>
                 <div className="h-[1px] flex-1 bg-neutral-200" />
               </div>
               <h2 className="text-5xl lg:text-7xl  tracking-tight text-black mb-6">
-                Алюминиевые окна
+                {t("aluminumWindowsTitle")}
               </h2>
               <p className="text-neutral-500 text-lg font-light leading-relaxed max-w-2xl">
-                Архитектурные решения для современного дизайна с панорамным
-                остеклением
+                {t("aluminumWindowsDesc")}
               </p>
             </div>
 
@@ -688,7 +681,7 @@ export default function Home() {
                     </div>
 
                     <button className="w-full py-4 bg-black text-white text-xs tracking-[0.2em] uppercase font-medium hover:bg-neutral-800 transition-colors duration-300">
-                      Заказать проект
+                      {t("orderProjectBtn")}
                     </button>
                   </div>
                 </div>
@@ -698,28 +691,25 @@ export default function Home() {
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div>
                 <h4 className="text-3xl lg:text-4xl font-light tracking-tight text-black mb-8">
-                  Преимущества алюминия
+                  {t("aluminumAdvantages")}
                 </h4>
                 <p className="text-neutral-500 font-light leading-relaxed mb-12 text-base">
-                  Алюминиевые системы — это выбор для современной архитектуры.
-                  Высокая прочность материала позволяет создавать конструкции
-                  больших площадей с минимальной шириной профиля, обеспечивая
-                  панорамный вид.
+                  {t("aluminumAdvDesc")}
                 </p>
 
                 <div className="space-y-8">
                   {[
                     {
-                      title: "Пожаробезопасность",
-                      desc: "Материал не горит и не выделяет токсичных веществ при нагреве",
+                      titleKey: "fireSafety",
+                      descKey: "fireSafetyDesc",
                     },
                     {
-                      title: "Химическая стойкость",
-                      desc: "Устойчивость к коррозии и воздействию агрессивной среды",
+                      titleKey: "chemicalResistance",
+                      descKey: "chemicalResistanceDesc",
                     },
                     {
-                      title: "Долговечность",
-                      desc: "Срок службы более 50 лет без потери эксплуатационных свойств",
+                      titleKey: "durability",
+                      descKey: "durabilityDesc",
                     },
                   ].map((benefit, i) => (
                     <div key={i} className="flex gap-6">
@@ -728,10 +718,10 @@ export default function Home() {
                       </div>
                       <div>
                         <h5 className="text-sm tracking-[0.15em] uppercase text-black mb-2 font-medium">
-                          {benefit.title}
+                          {t(benefit.titleKey)}
                         </h5>
                         <p className="text-neutral-500 text-sm font-light leading-relaxed">
-                          {benefit.desc}
+                          {t(benefit.descKey)}
                         </p>
                       </div>
                     </div>
@@ -751,7 +741,7 @@ export default function Home() {
                     50+
                   </div>
                   <div className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-medium">
-                    Лет службы
+                    {t("yearsOfService")}
                   </div>
                 </div>
               </div>

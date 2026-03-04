@@ -10,47 +10,45 @@ import {
   HeadphonesIcon,
 } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Index = () => {
+  const { t, isLoaded } = useLanguage();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const features = [
     {
       icon: Users,
-      title: "Профессиональная команда",
-      description:
-        "Нашими сотрудниками становятся люди готовые помогать, обучаться и обучать других, те, кто оставляет не только положительные эмоции, но и квалифицированную, качественную работу.",
+      title: t("professionalTeam"),
+      description: t("professionalTeamDesc"),
     },
     {
       icon: Target,
-      title: "Делаем сложные проекты",
-      description:
-        "Наша команда будет сопровождать вас на каждом этапе, от заказа до установки! Вы получите ответы на вопросы любой сложности. Опыт работы с проектами любой сложности позволяет нам решать любые задачи.",
+      title: t("complexProjects"),
+      description: t("complexProjectsDesc"),
     },
     {
       icon: Clock,
-      title: "Соблюдение сроков",
-      description:
-        "Ваш заказ никуда не исчезнет! Он будет качественно выполнен, с соблюдением всех поставленных сроков. А сотрудника, обрабатывающего ваш заказ, всегда сможет заменить его профессиональный коллега.",
+      title: t("deadlineCompliance"),
+      description: t("deadlineComplianceDesc"),
     },
     {
       icon: HeadphonesIcon,
-      title: "Call-центр",
-      description:
-        "Ежедневно с 10:00 до 19:00 сотрудники нашего call-центра готовы ответить на любые ваши вопросы, проинформировать о ходе заказа, связать с менеджером отдела продаж.",
+      title: t("callCenter"),
+      description: t("callCenterDesc"),
     },
     {
       icon: Shield,
-      title: "Контроль качества",
-      description:
-        "Специальная служба по контролю сервиса отслеживает качество выполненной работы, компетентность сотрудников и уровень сервиса компании на каждом этапе.",
+      title: t("qualityControl"),
+      description: t("qualityControlDesc"),
     },
     {
       icon: Truck,
-      title: "Бережная доставка",
-      description:
-        "Вся наша продукция доставляется в специально оборудованных, брендированных, автомобилях закрытого типа. Продукция защищена специальной пленкой и картоном.",
+      title: t("carefulDelivery"),
+      description: t("carefulDeliveryDesc"),
     },
   ];
+
+  if (!isLoaded) return null;
 
   return (
     <Wrapper modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
@@ -63,12 +61,11 @@ const Index = () => {
 
           <div className="max-w-6xl mx-auto relative z-10">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-              О нас
+              {t("aboutHeroTitle")}
             </h1>
             <div className="w-24 h-1.5 bg-gray-400 mb-8"></div>
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl leading-relaxed">
-              С 2019 года компания Оконный мастер стремительно развивается
-              благодаря нашим заказчикам и самым честным отношениям с ними.
+              {t("aboutHeroDescription")}
             </p>
           </div>
         </section>
@@ -78,25 +75,17 @@ const Index = () => {
           <div className="max-w-6xl mx-auto">
             <div className="bg-white rounded-2xl shadow-xl p-8 md:p-16 border border-gray-200">
               <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">
-                Почему именно мы?
+                {t("whyUsTitle")}
               </h2>
               <div className="space-y-6 text-gray-700">
                 <p className="text-lg md:text-xl leading-relaxed">
-                  Более трех лет мы были официальными дилерами компаний Akfa,
-                  Imzo и Engelberg, после чего было принято решение организовать
-                  собственное производство.
+                  {t("whyUsPara1")}
                 </p>
                 <p className="text-lg md:text-xl leading-relaxed">
-                  Самое главное в компании — коллектив! Нашими сотрудниками
-                  становятся люди, готовые помогать, обучаться и обучать других,
-                  те, кто оставляет не только положительные эмоции, но и
-                  квалифицированную, качественную работу.
+                  {t("whyUsPara2")}
                 </p>
                 <p className="text-lg md:text-xl leading-relaxed">
-                  Компания Оконный мастер прекрасно знает, какие бывают
-                  сложности и опасения при выборе пластиковых или алюминиевых
-                  окон. Наши консультанты создадут максимальный комфорт при
-                  решении этих задач.
+                  {t("whyUsPara3")}
                 </p>
               </div>
             </div>
@@ -107,7 +96,7 @@ const Index = () => {
         <section className="py-16 md:py-24 px-6">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">
-              Наши преимущества
+              {t("ourAdvantagesTitle")}
             </h2>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -137,24 +126,11 @@ const Index = () => {
         <section className="py-16 md:py-24 px-6 bg-white">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold mb-12 text-gray-900 text-center">
-              Ответственные сотрудники и качественный сервис
+              {t("qualityServiceTitle")}
             </h2>
             <div className="space-y-6 text-lg md:text-xl text-gray-700 leading-relaxed">
-              <p>
-                Руководству нашей компании важно, чтобы наши заказчики не
-                испытывали дискомфорта при работе с нашими специалистами. Именно
-                поэтому нами создана специальная служба по контролю нашего
-                сервиса. Она отслеживает качество выполненной работы,
-                компетентность сотрудников и уровень сервиса сотрудников
-                компании на каждом этапе.
-              </p>
-              <p>
-                Качественный результат, который видят наши заказчики, это
-                результат ответственной работы наших специалистов. Вся продукция
-                подвергается тщательной проверке, от поступающих заготовок до
-                готового продукта. Наши эксперты пристально следят за всеми
-                процессами.
-              </p>
+              <p>{t("qualityServicePara1")}</p>
+              <p>{t("qualityServicePara2")}</p>
             </div>
           </div>
         </section>
@@ -168,23 +144,11 @@ const Index = () => {
 
               <div className="relative z-10">
                 <h2 className="text-4xl md:text-5xl font-bold mb-8">
-                  Наша ответственность
+                  {t("responsibilityTitle")}
                 </h2>
                 <div className="space-y-6 text-lg md:text-xl text-gray-300">
-                  <p className="leading-relaxed">
-                    Чтобы обеспечить высочайший уровень своей работы и выполнить
-                    поставленную задачу на отлично, специалисты компании Оконный
-                    мастер регулярно посещают тренинги, проходят обучение и
-                    регулярно подтверждают свою квалификацию различными
-                    сертификатами.
-                  </p>
-                  <p className="leading-relaxed">
-                    Мы ориентированы на максимальное удобство и комфорт для
-                    наших заказчиков, поэтому вам не придется ехать в офис нашей
-                    компании для заключения договора. Все необходимые бумаги
-                    могут оформить специалисты, выезжающие для замера на ваш
-                    объект.
-                  </p>
+                  <p className="leading-relaxed">{t("responsibilityPara1")}</p>
+                  <p className="leading-relaxed">{t("responsibilityPara2")}</p>
                 </div>
               </div>
             </div>
@@ -195,21 +159,12 @@ const Index = () => {
         <section className="py-16 md:py-24 px-6 bg-gray-50">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold mb-12 text-gray-900 text-center">
-              Бережная доставка продукции
+              {t("deliveryTitle")}
             </h2>
             <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-gray-200">
               <div className="space-y-6 text-lg md:text-xl text-gray-700 leading-relaxed">
-                <p>
-                  Вся наша продукция доставляется в специально оборудованных,
-                  брендированных, автомобилях закрытого типа для обеспечения
-                  безопасной доставки ваших окон. Сама продукция защищена
-                  специальной пленкой и картоном, которые обеспечивают
-                  дополнительную сохранность.
-                </p>
-                <p>
-                  Доставка окон и дверей осуществляется до дома, офиса или
-                  квартиры заказчика.
-                </p>
+                <p>{t("deliveryPara1")}</p>
+                <p>{t("deliveryPara2")}</p>
               </div>
             </div>
           </div>
@@ -219,17 +174,16 @@ const Index = () => {
         <section className="py-16 md:py-24 px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-              Готовы начать работу?
+              {t("readyToStart")}
             </h2>
             <p className="text-xl text-gray-600 mb-10">
-              Call-центр работает ежедневно с 10:00 до 19:00. Мы готовы ответить
-              на любые ваши вопросы.
+              {t("callCenterHours")}
             </p>
             <button
               onClick={() => setModalIsOpen(true)}
               className="bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-gray-950 text-white px-10 py-5 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95"
             >
-              Связаться с нами
+              {t("contactUs")}
             </button>
           </div>
         </section>

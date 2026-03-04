@@ -4,17 +4,20 @@ import { usePathname } from "next/navigation"; // For Next.js 13+ App Router
 // OR for React Router: import { useLocation } from "react-router-dom";
 import Brand from "../brand";
 import ContactUsModal from "../modal";
+import LanguageSwitcher from "../languageSwitcher";
+import { useLanguage } from "@/context/LanguageContext";
 
 // Navigation data - easily maintainable
-const navigationItems = [
-  { id: 1, label: "Главная", href: "/" },
-  { id: 2, label: "Окна", href: "/windows" },
-  { id: 3, label: "Фасад", href: "/fasad" },
-  { id: 4, label: "Двери", href: "/dveri" },
-  { id: 5, label: "О нас", href: "/o-nas" },
+const getNavigationItems = (t) => [
+  { id: 1, label: t("home"), href: "/" },
+  { id: 2, label: t("windows"), href: "/windows" },
+  { id: 3, label: t("facades"), href: "/fasad" },
+  { id: 4, label: t("doors"), href: "/dveri" },
+  { id: 5, label: t("about"), href: "/o-nas" },
 ];
 
 const Header = ({ isModalOpen, setIsModalOpen }) => {
+  const { t, isLoaded } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const pathname = usePathname();
@@ -32,6 +35,10 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
     return activeItem.startsWith(href);
   };
 
+  if (!isLoaded) return null;
+
+  const navigationItems = getNavigationItems(t);
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-black/5">
@@ -39,7 +46,7 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
           <div className="flex items-center justify-between h-20">
             {/* Brand */}
             <div className="shrink-0">
-              <Brand title="Оконный Мастер" />
+              <Brand title={t("brandTitle")} />
             </div>
 
             {/* Desktop Navigation */}
@@ -73,20 +80,21 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
               ))}
             </nav>
 
-            {/* Contact CTA */}
+            {/* Contact CTA & Language Switcher */}
             <div className="hidden lg:flex items-center gap-5">
               <a
                 href="tel:+998979733333"
                 className="text-[13px] font-medium text-black/60 hover:text-black transition-colors"
               >
-                +998 97 973 33 33
+                {t("phone")}
               </a>
               <button
                 onClick={() => setIsModalOpen(true)}
                 className="px-6 py-2.5 bg-black text-white text-[12px] font-medium tracking-wide hover:bg-black/90 transition-all"
               >
-                Консультация
+                {t("consultation")}
               </button>
+              <LanguageSwitcher />
             </div>
 
             {/* Mobile Menu Toggle */}
@@ -160,8 +168,8 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
               transition: "all 300ms ease-in-out",
             }}
           >
-            <a href="tel:+998901234567" className="block text-lg text-black/60">
-              +998 90 123 45 67
+            <a href="tel:+998979733333" className="block text-lg text-black/60">
+              {t("phone")}
             </a>
             <button
               onClick={() => {
@@ -170,8 +178,11 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
               }}
               className="w-full py-3.5 bg-black text-white text-[13px] font-medium tracking-wide"
             >
-              Консультация
+              {t("consultation")}
             </button>
+            <div className="pt-2">
+              <LanguageSwitcher />
+            </div>
           </div>
         </nav>
       </div>

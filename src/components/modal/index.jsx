@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const ContactUsModal = ({ isOpen, onClose }) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -106,7 +108,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
     e.preventDefault();
 
     if (!turnstileToken) {
-      setError("Пожалуйста, пройдите проверку безопасности");
+      setError(t("verificationError"));
       return;
     }
 
@@ -313,11 +315,10 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                       letterSpacing: "-0.02em",
                     }}
                   >
-                    Свяжитесь с нами
+                    {t("modalTitle")}
                   </h2>
                   <p className="text-neutral-600 text-base">
-                    Мы будем рады услышать вас. Отправьте нам сообщение, и мы
-                    ответим как можно скорее.
+                    {t("modalDescription")}
                   </p>
                 </div>
 
@@ -352,7 +353,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                     }`}
                   >
                     <label className="block text-xs font-semibold text-neutral-900 mb-3 uppercase tracking-wider">
-                      Имя
+                      {t("nameField")}
                     </label>
                     <input
                       type="text"
@@ -363,7 +364,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                       onBlur={() => setFocused("")}
                       required
                       className="w-full px-0 py-3 bg-transparent border-0 border-b-2 border-neutral-300 focus:outline-none focus:border-transparent transition-all duration-300 text-neutral-900 placeholder-neutral-400 text-lg"
-                      placeholder="Ваше полное имя"
+                      placeholder={t("nameFieldPlaceholder")}
                     />
                     <div className="input-line"></div>
                   </div>
@@ -375,7 +376,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                     }`}
                   >
                     <label className="block text-xs font-semibold text-neutral-900 mb-3 uppercase tracking-wider">
-                      Телефон
+                      {t("phoneField")}
                     </label>
                     <input
                       type="tel"
@@ -386,7 +387,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                       onBlur={() => setFocused("")}
                       required
                       className="w-full px-0 py-3 bg-transparent border-0 border-b-2 border-neutral-300 focus:outline-none focus:border-transparent transition-all duration-300 text-neutral-900 placeholder-neutral-400 text-lg"
-                      placeholder="+998 (90) 123-45-67"
+                      placeholder={t("phoneFieldPlaceholder")}
                     />
                     <div className="input-line"></div>
                   </div>
@@ -398,7 +399,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                     }`}
                   >
                     <label className="block text-xs font-semibold text-neutral-900 mb-3 uppercase tracking-wider">
-                      Сообщение
+                      {t("messageField")}
                     </label>
                     <textarea
                       name="description"
@@ -409,7 +410,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                       required
                       rows="4"
                       className="w-full px-0 py-3 bg-transparent border-0 border-b-2 border-neutral-300 focus:outline-none focus:border-transparent transition-all duration-300 text-neutral-900 placeholder-neutral-400 resize-none text-lg"
-                      placeholder="Расскажите нам, что вы думаете..."
+                      placeholder={t("messageFieldPlaceholder")}
                     />
                     <div className="input-line"></div>
                   </div>
@@ -447,11 +448,11 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                             ></path>
                           </svg>
-                          Отправка
+                          {t("submitting")}
                         </>
                       ) : (
                         <>
-                          Отправить сообщение
+                          {t("send")}
                           <svg
                             className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
                             fill="none"
@@ -493,11 +494,9 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                   className="text-3xl font-bold mb-3 text-neutral-900"
                   style={{ fontFamily: "'Playfair Display', serif" }}
                 >
-                  Сообщение отправлено
+                  {t("successTitle")}
                 </h3>
-                <p className="text-neutral-600">
-                  Мы свяжемся с вами в ближайшее время
-                </p>
+                <p className="text-neutral-600">{t("successMessage")}</p>
               </div>
             )}
           </div>

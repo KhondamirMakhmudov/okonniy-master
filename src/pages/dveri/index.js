@@ -1,52 +1,45 @@
 import { useState } from "react";
 import Image from "next/image";
 import Wrapper from "@/layouts/Wrapper";
-import {
-  DoorClosed,
-  ShieldCheck,
-  Gauge,
-  Sparkles,
-  Wrench,
-} from "lucide-react";
+import { DoorClosed, ShieldCheck, Gauge, Sparkles, Wrench } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Index = () => {
+  const { t, isLoaded } = useLanguage();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const types = [
     {
       icon: DoorClosed,
-      title: "Входные двери",
-      description:
-        "Прочные конструкции с усиленным профилем и надежными замками для максимальной безопасности.",
+      title: t("entranceDoors"),
+      description: t("entranceDoorsDesc"),
     },
     {
       icon: Sparkles,
-      title: "Панорамные двери",
-      description:
-        "Больше света, больше пространства: идеальное решение для террас и выходов в сад.",
+      title: t("panoramicDoors"),
+      description: t("panoramicDoorsDesc"),
     },
     {
       icon: Gauge,
-      title: "Раздвижные системы",
-      description:
-        "Плавный ход, надежная фурнитура и экономия пространства в современных интерьерах.",
+      title: t("slidingSystems"),
+      description: t("slidingDesc"),
     },
   ];
 
   const advantages = [
     {
       icon: ShieldCheck,
-      title: "Безопасность",
-      description:
-        "Противовзломные элементы и усиленные петли обеспечивают уверенность каждый день.",
+      title: t("safety"),
+      description: t("safetyDesc"),
     },
     {
       icon: Wrench,
-      title: "Качественная фурнитура",
-      description:
-        "Надежные механизмы рассчитаны на интенсивную эксплуатацию и сохраняют плавный ход.",
+      title: t("qualityHardware"),
+      description: t("hardwareDesc"),
     },
   ];
+
+  if (!isLoaded) return null;
 
   return (
     <Wrapper modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
@@ -58,25 +51,23 @@ const Index = () => {
           </div>
           <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28">
             <p className="text-sm uppercase tracking-[0.3em] text-white/70 mb-4">
-              Дверные решения
+              {t("doorSolutions")}
             </p>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Двери высокого качества от Оконный Мастер
+              {t("doorsTitle")}
             </h1>
             <p className="text-lg md:text-xl text-white/80 max-w-3xl leading-relaxed">
-              Производим надежные двери для квартир, домов и коммерческих
-              объектов. Точная геометрия, отличная шумоизоляция и современный
-              дизайн — все, что нужно для уверенности и комфорта.
+              {t("doorsDescription")}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <button
                 onClick={() => setModalIsOpen(true)}
                 className="px-8 py-3 bg-white text-gray-900 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-white/90 transition"
               >
-                Запросить цену
+                {t("requestPrice")}
               </button>
               <div className="px-6 py-3 border border-white/30 text-white/80 text-xs tracking-[0.2em] uppercase">
-                Гарантия 5 лет
+                {t("warranty5Years")}
               </div>
             </div>
           </div>
@@ -86,7 +77,7 @@ const Index = () => {
         <section className="py-16 md:py-24 px-6">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
-              Виды дверей
+              {t("doorTypes")}
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
               {types.map((item, index) => (
@@ -112,12 +103,10 @@ const Index = () => {
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Комфорт и надежность в каждом элементе
+                {t("comfortReliability")}
               </h2>
               <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                Мы подбираем профиль, уплотнения и стеклопакеты с учетом ваших
-                задач. Двери сохраняют тепло, защищают от шума и служат долгие
-                годы без перекосов и скрипов.
+                {t("comfortReliabilityDesc")}
               </p>
               <div className="space-y-5">
                 {advantages.map((item, index) => (
@@ -136,7 +125,7 @@ const Index = () => {
             <div className="relative h-[360px] rounded-2xl overflow-hidden shadow-xl border border-gray-200">
               <Image
                 src="/images/engelberg6.png"
-                alt="Двери Оконный Мастер"
+                alt={t("doorsAlt")}
                 fill
                 className="object-contain bg-white"
               />
@@ -149,17 +138,21 @@ const Index = () => {
           <div className="max-w-6xl mx-auto">
             <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 md:p-12 text-white">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Полный цикл от замера до монтажа
+                {t("fullCycle")}
               </h2>
               <p className="text-white/80 text-lg leading-relaxed mb-8">
-                Наши специалисты выезжают на объект, выполняют точный замер,
-                подбирают комплектацию и устанавливают двери с гарантией на
-                работу и материалы.
+                {t("fullCycleDesc")}
               </p>
               <div className="grid md:grid-cols-3 gap-6 text-sm uppercase tracking-[0.2em]">
-                <div className="bg-white/10 rounded-xl p-5">Замер и проект</div>
-                <div className="bg-white/10 rounded-xl p-5">Производство</div>
-                <div className="bg-white/10 rounded-xl p-5">Монтаж</div>
+                <div className="bg-white/10 rounded-xl p-5">
+                  {t("measurementProject")}
+                </div>
+                <div className="bg-white/10 rounded-xl p-5">
+                  {t("production")}
+                </div>
+                <div className="bg-white/10 rounded-xl p-5">
+                  {t("installation")}
+                </div>
               </div>
             </div>
           </div>
@@ -169,16 +162,16 @@ const Index = () => {
         <section className="py-16 md:py-24 px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Подберем идеальные двери под ваш проект
+              {t("perfectDoorsTitle")}
             </h2>
             <p className="text-lg text-gray-600 mb-8">
-              Оставьте заявку — мы свяжемся с вами и предложим лучший вариант.
+              {t("perfectDoorsDesc")}
             </p>
             <button
               onClick={() => setModalIsOpen(true)}
               className="px-10 py-4 bg-gray-900 text-white text-xs tracking-[0.25em] uppercase font-semibold hover:bg-gray-800 transition"
             >
-              Оставить заявку
+              {t("submitRequest")}
             </button>
           </div>
         </section>

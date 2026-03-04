@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Sidebar = ({ onCompanySelect }) => {
+  const { t, isLoaded } = useLanguage();
   const [selectedCompany, setSelectedCompany] = useState(1);
 
   const navigationItems = [
@@ -13,14 +15,16 @@ const Sidebar = ({ onCompanySelect }) => {
     onCompanySelect(item);
   };
 
+  if (!isLoaded) return null;
+
   return (
     <aside className="w-72 border-r border-l border-[#E5E5E5] bg-white p-6 flex flex-col gap-6 sticky top-18 h-[calc(100vh-72px)]">
       <div>
         <h1 className="text-black text-base font-bold leading-normal">
-          Каталог брендов
+          {t("brandCatalog")}
         </h1>
         <p className="text-[#333333] text-sm font-normal leading-normal">
-          Выберите производителя
+          {t("selectManufacturer")}
         </p>
       </div>
 

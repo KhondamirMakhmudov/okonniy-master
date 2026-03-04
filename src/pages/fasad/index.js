@@ -2,45 +2,44 @@ import { useState } from "react";
 import Image from "next/image";
 import Wrapper from "@/layouts/Wrapper";
 import { Layers, ShieldCheck, Ruler, Sparkles, Building2 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Index = () => {
+  const { t, isLoaded } = useLanguage();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const systems = [
     {
       icon: Layers,
-      title: "Стоечно-ригельные системы",
-      description:
-        "Классическое решение для витражей и фасадов с точной геометрией и стабильной жесткостью конструкций.",
+      title: t("positionRigel"),
+      description: t("positionRigelDesc"),
     },
     {
       icon: Building2,
-      title: "Структурное остекление",
-      description:
-        "Эффект цельного стеклянного полотна с минимальными видимыми стыками для современных зданий.",
+      title: t("structuralGlazing"),
+      description: t("structuralGlazingDesc"),
     },
     {
       icon: Sparkles,
-      title: "Полуструктурные фасады",
-      description:
-        "Баланс между эстетикой и технологичностью для коммерческих и жилых объектов.",
+      title: t("semiStructured"),
+      description: t("semiStructuredDesc"),
     },
   ];
 
   const qualities = [
     {
       icon: ShieldCheck,
-      title: "Надежная герметичность",
-      description:
-        "Многоконтурные уплотнения защищают от ветра, влаги и пыли в любое время года.",
+      title: t("rightHermetic"),
+      description: t("rightHermeticDesc"),
     },
     {
       icon: Ruler,
-      title: "Точная геометрия",
-      description:
-        "Стабильные размеры и жесткость профиля обеспечивают идеальную посадку стеклопакетов.",
+      title: t("rightGeometry"),
+      description: t("rightGeometryDesc"),
     },
   ];
+
+  if (!isLoaded) return null;
 
   return (
     <Wrapper modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
@@ -52,25 +51,23 @@ const Index = () => {
           </div>
           <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28">
             <p className="text-sm uppercase tracking-[0.3em] text-white/70 mb-4">
-              Фасадные системы
+              {t("facadesTitle")}
             </p>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Архитектурные фасады премиум-уровня
+              {t("facadesDescription")}
             </h1>
             <p className="text-lg md:text-xl text-white/80 max-w-3xl leading-relaxed">
-              Оконный Мастер проектирует и производит фасадные конструкции для
-              жилых и коммерческих зданий. Мы обеспечиваем точную геометрию,
-              устойчивость к климату и безупречный внешний вид на долгие годы.
+              {t("facadesContent")}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <button
                 onClick={() => setModalIsOpen(true)}
                 className="px-8 py-3 bg-white text-gray-900 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-white/90 transition"
               >
-                Получить консультацию
+                {t("getConsultation")}
               </button>
               <div className="px-6 py-3 border border-white/30 text-white/80 text-xs tracking-[0.2em] uppercase">
-                Собственное производство
+                {t("ownProduction")}
               </div>
             </div>
           </div>
@@ -80,7 +77,7 @@ const Index = () => {
         <section className="py-16 md:py-24 px-6">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
-              Типы фасадных решений
+              {t("facadesTypes")}
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
               {systems.map((item, index) => (
@@ -106,12 +103,10 @@ const Index = () => {
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Технологичность и контроль качества
+                {t("technology")}
               </h2>
               <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                Мы используем усиленные профили, надежную фурнитуру и
-                энергоэффективные стеклопакеты. Каждая партия проходит проверку
-                на герметичность, геометрию и соответствие проекту.
+                {t("technologyDesc")}
               </p>
               <div className="space-y-5">
                 {qualities.map((item, index) => (
@@ -130,7 +125,7 @@ const Index = () => {
             <div className="relative h-[360px] rounded-2xl overflow-hidden shadow-xl border border-gray-200">
               <Image
                 src="/images/engelberg5.png"
-                alt="Фасадные системы Оконный Мастер"
+                alt={t("facadesTitle")}
                 fill
                 className="object-contain bg-white"
               />
@@ -143,17 +138,21 @@ const Index = () => {
           <div className="max-w-6xl mx-auto">
             <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 md:p-12 text-white">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Где применяются наши фасады
+                {t("facadesWhere")}
               </h2>
               <p className="text-white/80 text-lg leading-relaxed mb-8">
-                Фасадные конструкции Оконный Мастер подходят для офисных центров,
-                торговых комплексов, жилых новостроек, общественных пространств и
-                частных домов.
+                {t("facadesWhereDesc")}
               </p>
               <div className="grid md:grid-cols-3 gap-6 text-sm uppercase tracking-[0.2em]">
-                <div className="bg-white/10 rounded-xl p-5">Бизнес-центры</div>
-                <div className="bg-white/10 rounded-xl p-5">Торговые здания</div>
-                <div className="bg-white/10 rounded-xl p-5">Жилые объекты</div>
+                <div className="bg-white/10 rounded-xl p-5">
+                  {t("businessCenters")}
+                </div>
+                <div className="bg-white/10 rounded-xl p-5">
+                  {t("commercialBuildings")}
+                </div>
+                <div className="bg-white/10 rounded-xl p-5">
+                  {t("residentialObjects")}
+                </div>
               </div>
             </div>
           </div>
@@ -163,16 +162,14 @@ const Index = () => {
         <section className="py-16 md:py-24 px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Хотите рассчитать фасад?
+              {t("calculateFacade")}
             </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Оставьте заявку, и мы подготовим предложение под ваш проект.
-            </p>
+            <p className="text-lg text-gray-600 mb-8">{t("calculateDesc")}</p>
             <button
               onClick={() => setModalIsOpen(true)}
               className="px-10 py-4 bg-gray-900 text-white text-xs tracking-[0.25em] uppercase font-semibold hover:bg-gray-800 transition"
             >
-              Заказать расчет
+              {t("orderCalculation")}
             </button>
           </div>
         </section>

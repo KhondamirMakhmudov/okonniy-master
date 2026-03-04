@@ -1,4 +1,7 @@
+import { useLanguage } from "@/context/LanguageContext";
+
 const Footer = () => {
+  const { t } = useLanguage();
   return (
     <footer
       className="relative w-full bg-white border-t border-neutral-200"
@@ -34,14 +37,13 @@ const Footer = () => {
                 <path d="M20 8V28" stroke="currentColor" strokeWidth="1.5" />
               </svg>
               <h4 className="text-xs sm:text-sm tracking-[0.1em] uppercase font-medium text-black">
-                Оконный Мастер
+                {t("brandTitle")}
               </h4>
             </div>
 
             {/* Description */}
             <p className="text-neutral-500 text-sm sm:text-base font-light leading-relaxed mb-6 sm:mb-8 max-w-md">
-              Ваш надежный партнер в мире светопрозрачных конструкций. Качество,
-              проверенное временем и тысячами довольных клиентов в Ташкенте.
+              {t("footerDescription")}
             </p>
 
             {/* Social Links */}
@@ -112,14 +114,14 @@ const Footer = () => {
           {/* Contact Column */}
           <div className="lg:col-span-3">
             <h5 className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-medium mb-4 sm:mb-6">
-              Контакты
+              {t("contacts")}
             </h5>
             <div className="space-y-3 sm:space-y-4">
               <div>
                 <p className="text-sm text-neutral-600 font-light leading-relaxed">
-                  г. Ташкент, Юнусабадский р-н
+                  {t("monWeekAddress")}
                   <br />
-                  ул. Амира Темура, 107Б
+                  {t("address")}
                 </p>
               </div>
               <div className="pt-1 sm:pt-2">
@@ -144,32 +146,32 @@ const Footer = () => {
           {/* Navigation Column */}
           <div className="lg:col-span-2">
             <h5 className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-medium mb-4 sm:mb-6">
-              Навигация
+              {t("navigation")}
             </h5>
             <nav className="flex flex-col gap-2.5 sm:gap-3">
               <a
                 href="#pvc"
                 className="text-sm text-neutral-600 font-light hover:text-black transition-colors active:opacity-60 py-0.5"
               >
-                ПВХ окна
+                {t("pvhWindows")}
               </a>
               <a
                 href="#alu"
                 className="text-sm text-neutral-600 font-light hover:text-black transition-colors active:opacity-60 py-0.5"
               >
-                Алюминиевые окна
+                {t("aluminumWindows")}
               </a>
               <a
                 href="#materials"
                 className="text-sm text-neutral-600 font-light hover:text-black transition-colors active:opacity-60 py-0.5"
               >
-                Материалы
+                {t("materialsTitle")}
               </a>
               <a
                 href="#contact-section"
                 className="text-sm text-neutral-600 font-light hover:text-black transition-colors active:opacity-60 py-0.5"
               >
-                Контакты
+                {t("contacts")}
               </a>
             </nav>
           </div>
@@ -177,12 +179,12 @@ const Footer = () => {
           {/* Working Hours Column */}
           <div className="lg:col-span-2">
             <h5 className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-medium mb-4 sm:mb-6">
-              Режим работы
+              {t("workingHours")}
             </h5>
             <div className="space-y-2.5 sm:space-y-3 text-sm text-neutral-600 font-light">
-              <p>Пн - Пт: 9:00 - 18:00</p>
-              <p>Суббота: 10:00 - 16:00</p>
-              <p>Воскресенье: Выходной</p>
+              <p>{t("weekdays")}</p>
+              <p>{t("saturday")}</p>
+              <p>{t("sunday")}</p>
             </div>
           </div>
         </div>
@@ -192,7 +194,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6">
             {/* Copyright */}
             <div className="text-xs text-neutral-400 font-light order-2 md:order-1">
-              © 2026 Оконный Мастер. Все права защищены.
+              © 2026 {t("brandTitle")}. {t("allRightsReserved")}
             </div>
 
             {/* Legal Links */}
@@ -201,19 +203,19 @@ const Footer = () => {
                 href="#privacy"
                 className="hover:text-black transition-colors active:opacity-60 py-1"
               >
-                Политика конфиденциальности
+                {t("privacyPolicy")}
               </a>
               <a
                 href="#terms"
                 className="hover:text-black transition-colors active:opacity-60 py-1"
               >
-                Условия использования
+                {t("termsOfUse")}
               </a>
               <a
                 href="#docs"
                 className="hover:text-black transition-colors active:opacity-60 py-1"
               >
-                Документация
+                {t("documentation")}
               </a>
             </div>
           </div>

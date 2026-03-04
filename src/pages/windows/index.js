@@ -2,6 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Sidebar from "@/components/sidebar";
 import Wrapper from "@/layouts/Wrapper";
+import { useLanguage } from "@/context/LanguageContext";
 
 const brandData = {
   1: {
@@ -106,11 +107,117 @@ const brandData = {
 };
 
 const Index = () => {
-  const [selectedBrand, setSelectedBrand] = useState(brandData[1]); // Default to Engelberg
+  const { t, isLoaded } = useLanguage();
+  const [selectedBrand, setSelectedBrand] = useState(1);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const handleCompanySelect = (company) => {
-    setSelectedBrand(brandData[company.id]);
+
+  const getBrandData = () => {
+    if (selectedBrand === 1) {
+      return {
+        id: 1,
+        name: t("akfaBrand"),
+        slug: "akfa",
+        tagline: t("akfaTagline"),
+        hero: {
+          title: t("akfaQuality"),
+          description: t("akfaModern"),
+          image: "/images/akfa-hero.jpg",
+        },
+        features: [
+          {
+            title: t("akfaWorld"),
+            description: t("akfaWorldDesc"),
+            icon: "shield",
+            image: "/images/akfa1.png",
+          },
+          {
+            title: t("akfaHermetic"),
+            description: t("akfaHermeticDesc"),
+            icon: "bolt",
+            image: "/images/akfa2.png",
+          },
+        ],
+        products: [
+          {
+            id: 1,
+            name: t("pvhWindowsType"),
+            price: t("akfaFrom"),
+            image: "/images/akfa-1.jpg",
+          },
+          {
+            id: 2,
+            name: t("doorsTitle"),
+            price: t("akfaDoorsFrom"),
+            image: "/images/akfa-2.jpg",
+          },
+        ],
+      };
+    } else {
+      return {
+        id: 2,
+        name: t("engelbergBrand"),
+        slug: "engelberg",
+        tagline: t("engelbergTagline"),
+        hero: {
+          title: t("engelbergBrand"),
+          subtitle: t("engelbergSubtitle"),
+          description: t("engelbergDescription"),
+          image: "/images/engelberg-hero.jpg",
+        },
+        features: [
+          {
+            title: t("engelbergPerfection"),
+            description: t("engelbergPerfectionDesc"),
+            highlight: t("engelbergSeries"),
+            icon: "architecture",
+            image: "/images/engelberg.png",
+          },
+          {
+            title: t("engelbergCool"),
+            description: t("engelbergCoolDesc"),
+            highlight: t("engelbergSummer"),
+            icon: "ac_unit",
+            image: "/images/engelberg2.png",
+          },
+          {
+            title: t("engelbergWinter"),
+            description: t("engelbergWinterDesc"),
+            icon: "local_fire_department",
+            image: "/images/engelberg4.png",
+          },
+        ],
+        comfort: {
+          title: t("engelbergMaxComfort"),
+          description: t("engelbergMaxComfortDesc"),
+          image: "/images/engelberg3.png",
+        },
+        specifications: {
+          title: t("engelbergCharacteristics"),
+          specs: [
+            { label: t("engelbergType"), value: t("pvc") },
+            { label: t("engelbergProfileSeries"), value: t("warm") },
+            { label: t("engelbergChambers"), value: t("five") },
+            { label: t("engelbergThickness"), value: t("twoPointEight") },
+            { label: t("engelbergMountingPlane"), value: t("seventyMm") },
+            {
+              label: "Максимальная высота створки",
+              value: t("twoThreeHundred"),
+            },
+            { label: "Максимальная ширина створки", value: "1000 мм" },
+            { label: "Толщина стеклопакета", value: "24-30 мм" },
+          ],
+        },
+      };
+    }
   };
+
+  const handleCompanySelect = (company) => {
+    setSelectedBrand(company.id);
+  };
+
+  if (!isLoaded) return null;
+
+  const selectedBrandData = getBrandData();
 
   return (
     <Wrapper modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
@@ -123,27 +230,27 @@ const Index = () => {
             <div className="absolute inset-0 bg-black/20"></div>
             <div className="relative z-10 container mx-auto px-6 h-full flex flex-col justify-center">
               <p className="text-white/90 text-sm font-medium mb-2 uppercase tracking-wide">
-                {selectedBrand.tagline}
+                {selectedBrandData.tagline}
               </p>
               <h1 className="text-5xl font-bold text-white mb-4">
-                {selectedBrand.hero.title}
+                {selectedBrandData.hero.title}
               </h1>
-              {selectedBrand.hero.subtitle && (
+              {selectedBrandData.hero.subtitle && (
                 <h2 className="text-3xl font-semibold text-white/90 mb-4">
-                  {selectedBrand.hero.subtitle}
+                  {selectedBrandData.hero.subtitle}
                 </h2>
               )}
               <p className="text-white/80 text-lg max-w-2xl">
-                {selectedBrand.hero.description}
+                {selectedBrandData.hero.description}
               </p>
             </div>
           </div>
 
           <div className="container mx-auto px-6 py-12">
             {/* Features Section */}
-            {selectedBrand.features && (
+            {selectedBrandData.features && (
               <div className="space-y-16 mb-16">
-                {selectedBrand.features.map((feature, index) => (
+                {selectedBrandData.features.map((feature, index) => (
                   <div
                     key={index}
                     className={`flex flex-col lg:flex-row items-center gap-8 ${
@@ -189,22 +296,22 @@ const Index = () => {
             )}
 
             {/* Comfort Section */}
-            {selectedBrand.comfort && (
+            {selectedBrandData.comfort && (
               <div className="mb-16 bg-gradient-to-br from-gray-50 to-neutral-100 rounded-2xl p-8 lg:p-12">
                 <div className="flex flex-col lg:flex-row items-center gap-8">
                   <div className="w-full lg:w-1/2 space-y-4">
                     <h2 className="text-3xl font-bold text-gray-900">
-                      {selectedBrand.comfort.title}
+                      {selectedBrandData.comfort.title}
                     </h2>
                     <p className="text-gray-700 text-lg leading-relaxed">
-                      {selectedBrand.comfort.description}
+                      {selectedBrandData.comfort.description}
                     </p>
                   </div>
                   <div className="w-full lg:w-1/2">
                     <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
                       <Image
-                        src={selectedBrand.comfort.image}
-                        alt={selectedBrand.comfort.title}
+                        src={selectedBrandData.comfort.image}
+                        alt={selectedBrandData.comfort.title}
                         fill
                         className="object-contain"
                       />
@@ -215,32 +322,35 @@ const Index = () => {
             )}
 
             {/* Specifications Section */}
-            {selectedBrand.specifications && (
+            {selectedBrandData.specifications && (
               <div className="mb-16">
                 <h2 className="text-3xl font-bold text-gray-900 mb-8">
-                  {selectedBrand.specifications.title}
+                  {selectedBrandData.specifications.title}
                 </h2>
                 <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    {selectedBrand.specifications.specs.map((spec, index) => (
-                      <div
-                        key={index}
-                        className={`p-6 border-b border-r border-gray-200 ${
-                          index % 3 === 2 ? "lg:border-r-0" : ""
-                        } ${
-                          index >= selectedBrand.specifications.specs.length - 3
-                            ? "border-b-0"
-                            : ""
-                        }`}
-                      >
-                        <p className="text-sm text-gray-500 mb-1">
-                          {spec.label}
-                        </p>
-                        <p className="text-lg font-semibold text-gray-900">
-                          {spec.value}
-                        </p>
-                      </div>
-                    ))}
+                    {selectedBrandData.specifications.specs.map(
+                      (spec, index) => (
+                        <div
+                          key={index}
+                          className={`p-6 border-b border-r border-gray-200 ${
+                            index % 3 === 2 ? "lg:border-r-0" : ""
+                          } ${
+                            index >=
+                            selectedBrand.specifications.specs.length - 3
+                              ? "border-b-0"
+                              : ""
+                          }`}
+                        >
+                          <p className="text-sm text-gray-500 mb-1">
+                            {spec.label}
+                          </p>
+                          <p className="text-lg font-semibold text-gray-900">
+                            {spec.value}
+                          </p>
+                        </div>
+                      ),
+                    )}
                   </div>
                 </div>
               </div>
@@ -249,17 +359,17 @@ const Index = () => {
             {/* CTA Section */}
             <div className="bg-gray-900 rounded-2xl p-8 lg:p-12 text-center text-white">
               <h2 className="text-3xl font-bold mb-4">
-                Готовы заказать {selectedBrand.name}?
+                {t("getConsultation")} {selectedBrandData.name}?
               </h2>
               <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-                Свяжитесь с нами для консультации и расчета стоимости
+                {t("getConsultation")} и расчета стоимости
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <button
                   onClick={() => setModalIsOpen(true)}
                   className="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors cursor-pointer"
                 >
-                  Заказать звонок
+                  {t("consultation")}
                 </button>
               </div>
             </div>

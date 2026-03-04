@@ -337,6 +337,22 @@ const translations = {
       "Оставьте заявку — мы свяжемся с вами и предложим лучший вариант.",
     submitRequest: "Оставить заявку",
     doorsAlt: "Двери Оконный Мастер",
+
+    // Footer
+    footerBrandTitle: "Оконный Мастер",
+    footerDescription:
+      "Ваш надежный партнер в мире светопрозрачных конструкций. Качество, проверенное временем и тысячами довольных клиентов в Ташкенте.",
+    footerContacts: "Контакты",
+    footerAddress: "Index, блок D01, 100146, Янгихаётский район, Ташкент, Узбекистан",
+    footerNavigation: "Навигация",
+    footerPvcWindows: "ПВХ окна",
+    footerAluminumWindows: "Алюминиевые окна",
+    footerMaterials: "Материалы",
+    footerContactsLink: "Контакты",
+    footerWorkingHours: "Режим работы",
+    footerMonToSat: "Пн - Сб: 9:00 - 18:00",
+    footerSunday: "Воскресенье: Выходной",
+    footerCopyright: "© 2026 Оконный Мастер. Все права защищены.",
   },
   uz: {
     // Navigation
@@ -676,6 +692,22 @@ const translations = {
       "Ariza qoldiring - biz siz bilan bog'lanamiz va eng yaxshi variantni taklif qilamiz.",
     submitRequest: "Ariza qoldirish",
     doorsAlt: "Oyna Ustasi eshiklari",
+
+    // Footer
+    footerBrandTitle: "Oyna Ustasi",
+    footerDescription:
+      "Shaffof tuzilishlar dunyosida sizning ishonchli hamkoringiz. Vaqti va minglab qanoatli mijozlar orqali tekshirilgan sifat Toshkentda.",
+    footerContacts: "Kontaktlar",
+    footerAddress: "Index, blok D01, 100146, Yangihayt tumani, Toshkent, O'zbekiston",
+    footerNavigation: "Navigatsiya",
+    footerPvcWindows: "PVH oynalar",
+    footerAluminumWindows: "Alyuminiy oynalar",
+    footerMaterials: "Materiallar",
+    footerContactsLink: "Kontaktlar",
+    footerWorkingHours: "Ish vaqti",
+    footerMonToSat: "Dush - Shab: 9:00 - 18:00",
+    footerSunday: "Yakshanba: Dam olish kuni",
+    footerCopyright: "© 2026 Oyna Ustasi. Barcha huquqlar himoyalangan.",
   },
 };
 

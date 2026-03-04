@@ -2,6 +2,7 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const Footer = () => {
   const { t } = useLanguage();
+
   return (
     <footer
       className="relative w-full bg-white border-t border-neutral-200"
@@ -37,7 +38,7 @@ const Footer = () => {
                 <path d="M20 8V28" stroke="currentColor" strokeWidth="1.5" />
               </svg>
               <h4 className="text-xs sm:text-sm tracking-[0.1em] uppercase font-medium text-black">
-                {t("brandTitle")}
+                {t("footerBrandTitle")}
               </h4>
             </div>
 
@@ -49,7 +50,7 @@ const Footer = () => {
             {/* Social Links */}
             <div className="flex items-center gap-3 sm:gap-4">
               <a
-                href="#"
+                href="https://t.me/asabiyya_callcenter"
                 className="w-11 h-11 sm:w-10 sm:h-10 border border-neutral-200 flex items-center justify-center text-neutral-400 hover:text-black hover:border-black transition-all duration-300 active:scale-95"
                 aria-label="Telegram"
               >
@@ -114,30 +115,28 @@ const Footer = () => {
           {/* Contact Column */}
           <div className="lg:col-span-3">
             <h5 className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-medium mb-4 sm:mb-6">
-              {t("contacts")}
+              {t("footerContacts")}
             </h5>
             <div className="space-y-3 sm:space-y-4">
               <div>
                 <p className="text-sm text-neutral-600 font-light leading-relaxed">
-                  {t("monWeekAddress")}
-                  <br />
-                  {t("address")}
+                  {t("footerAddress")}
                 </p>
               </div>
               <div className="pt-1 sm:pt-2">
                 <a
-                  href="tel:+998979733333"
+                  href="tel:+998971233333"
                   className="text-base sm:text-lg text-black font-light hover:opacity-60 transition-opacity inline-block active:opacity-40"
                 >
-                  +998 (97) 973-33-33
+                  +998 (97) 123-33-33
                 </a>
               </div>
               <div>
                 <a
-                  href="mailto:info@okonmaster.uz"
+                  href="mailto:callcenter@asabiyya.uz"
                   className="text-sm text-neutral-600 font-light hover:text-black transition-colors inline-block active:opacity-60"
                 >
-                  info@okonmaster.uz
+                  callcenter@asabiyya.uz
                 </a>
               </div>
             </div>
@@ -146,32 +145,32 @@ const Footer = () => {
           {/* Navigation Column */}
           <div className="lg:col-span-2">
             <h5 className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-medium mb-4 sm:mb-6">
-              {t("navigation")}
+              {t("footerNavigation")}
             </h5>
             <nav className="flex flex-col gap-2.5 sm:gap-3">
               <a
                 href="#pvc"
                 className="text-sm text-neutral-600 font-light hover:text-black transition-colors active:opacity-60 py-0.5"
               >
-                {t("pvhWindows")}
+                {t("footerPvcWindows")}
               </a>
               <a
                 href="#alu"
                 className="text-sm text-neutral-600 font-light hover:text-black transition-colors active:opacity-60 py-0.5"
               >
-                {t("aluminumWindows")}
+                {t("footerAluminumWindows")}
               </a>
               <a
                 href="#materials"
                 className="text-sm text-neutral-600 font-light hover:text-black transition-colors active:opacity-60 py-0.5"
               >
-                {t("materialsTitle")}
+                {t("footerMaterials")}
               </a>
               <a
                 href="#contact-section"
                 className="text-sm text-neutral-600 font-light hover:text-black transition-colors active:opacity-60 py-0.5"
               >
-                {t("contacts")}
+                {t("footerContactsLink")}
               </a>
             </nav>
           </div>
@@ -179,45 +178,45 @@ const Footer = () => {
           {/* Working Hours Column */}
           <div className="lg:col-span-2">
             <h5 className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-medium mb-4 sm:mb-6">
-              {t("workingHours")}
+              {t("footerWorkingHours")}
             </h5>
             <div className="space-y-2.5 sm:space-y-3 text-sm text-neutral-600 font-light">
-              <p>{t("weekdays")}</p>
-              <p>{t("saturday")}</p>
-              <p>{t("sunday")}</p>
+              <p>{t("footerMonToSat")}</p>
+              {/* <p>Суббота: 10:00 - 16:00</p> */}
+              <p>{t("footerSunday")}</p>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="py-6 sm:py-8 border-t border-neutral-200">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6">
+          <div className="flex flex-col md:flex-row justify-center items-center md:items-center gap-4 sm:gap-6">
             {/* Copyright */}
             <div className="text-xs text-neutral-400 font-light order-2 md:order-1">
-              © 2026 {t("brandTitle")}. {t("allRightsReserved")}
+              {t("footerCopyright")}
             </div>
 
             {/* Legal Links */}
-            <div className="flex flex-wrap gap-4 sm:gap-6 text-xs text-neutral-400 font-light order-1 md:order-2">
+            {/* <div className="flex flex-wrap gap-4 sm:gap-6 text-xs text-neutral-400 font-light order-1 md:order-2">
               <a
                 href="#privacy"
                 className="hover:text-black transition-colors active:opacity-60 py-1"
               >
-                {t("privacyPolicy")}
+                Политика конфиденциальности
               </a>
               <a
                 href="#terms"
                 className="hover:text-black transition-colors active:opacity-60 py-1"
               >
-                {t("termsOfUse")}
+                Условия использования
               </a>
               <a
                 href="#docs"
                 className="hover:text-black transition-colors active:opacity-60 py-1"
               >
-                {t("documentation")}
+                Документация
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

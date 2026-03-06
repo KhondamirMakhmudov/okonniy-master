@@ -117,18 +117,21 @@ const ContactUsModal = ({ isOpen, onClose }) => {
     setError("");
 
     try {
-      const response = await fetch("http://10.40.9.114:8000/api/v1/public", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Turnstile-Token": turnstileToken,
+      const response = await fetch(
+        "https://crm01.tpp.uz/api/v1/public/customers",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Turnstile-Token": turnstileToken,
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            phone_number: formData.phone,
+            message: formData.description,
+          }),
         },
-        body: JSON.stringify({
-          name: formData.name,
-          phone_number: formData.phone,
-          message: formData.description,
-        }),
-      });
+      );
 
       console.log("Response status:", response.status);
 

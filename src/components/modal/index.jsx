@@ -97,9 +97,22 @@ const ContactUsModal = ({ isOpen, onClose }) => {
   }, [isOpen]);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "phone") {
+      const digitsOnly = value.replace(/\D/g, "");
+      const normalizedPhone = `+${digitsOnly}`;
+      setFormData({
+        ...formData,
+        phone: normalizedPhone,
+      });
+      if (error) setError("");
+      return;
+    }
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
     if (error) setError("");
   };
@@ -127,7 +140,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
           },
           body: JSON.stringify({
             name: formData.name,
-            phone_number: formData.phone,
+            phone_number: formData.phone.replace(/^\+/, ""),
             message: formData.description,
           }),
         },

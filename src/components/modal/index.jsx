@@ -162,6 +162,14 @@ const ContactUsModal = ({ isOpen, onClose }) => {
       setIsSubmitting(false);
       setIsSuccess(true);
 
+      if (typeof window !== "undefined" && typeof window.gtag === "function") {
+        window.gtag("event", "conversion", {
+          send_to: "AW-17991310916/saMbCMDVuIIcEMS89oJD",
+          value: 1.0,
+          currency: "USD",
+        });
+      }
+
       setTimeout(() => {
         setIsSuccess(false);
         setFormData({ name: "", phone: "", description: "" });
